@@ -1,5 +1,6 @@
 package com.github.cadecode.ubp.common.exception;
 
+import cn.hutool.core.util.StrUtil;
 import com.github.cadecode.ubp.common.enums.ErrorCode;
 import lombok.Getter;
 
@@ -30,17 +31,19 @@ public class GeneralException extends BaseException {
      * @param errorCode 错误信息码
      * @param throwable cause
      * @param moreInfo  更多异常信息
+     * @param params 字符串模板参数
      */
     public GeneralException(ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
-        super(geneErrorMessage(errorCode, moreInfo), throwable, params);
+        super(geneErrorMessage(errorCode, moreInfo, params), throwable);
         this.errorCode = errorCode;
-        this.moreInfo = moreInfo;
+        this.moreInfo = StrUtil.format(moreInfo, params);
     }
 
     /**
      * 抛出未知异常
      *
      * @param moreInfo 更多异常信息
+     * @param params 字符串模板参数
      * @return GeneralException
      */
     public static GeneralException of(String moreInfo, Object... params) {
@@ -52,6 +55,7 @@ public class GeneralException extends BaseException {
      *
      * @param throwable cause
      * @param moreInfo  更多异常信息
+     * @param params 字符串模板参数
      * @return GeneralException
      */
     public static GeneralException of(Throwable throwable, String moreInfo, Object... params) {
@@ -63,6 +67,7 @@ public class GeneralException extends BaseException {
      *
      * @param errorCode 错误信息码
      * @param moreInfo  更多异常信息
+     * @param params 字符串模板参数
      * @return GeneralException
      */
     public static GeneralException of(ErrorCode errorCode, String moreInfo, Object... params) {
@@ -86,10 +91,13 @@ public class GeneralException extends BaseException {
      * @param errorCode 错误信息码
      * @param throwable cause
      * @param moreInfo  更多异常信息
+     * @param params 字符串模板参数
      * @return GeneralException
      */
     public static GeneralException of(ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
-        return new GeneralException(errorCode, throwable, moreInfo, params);
+        // 这里直接调用 StrUtil.format 得到 moreInfo
+        // 避免在构造方法中重复 format 解析字符串模板
+        return new GeneralException(errorCode, throwable, StrUtil.format(moreInfo, params));
     }
 
     /**
@@ -99,7 +107,7 @@ public class GeneralException extends BaseException {
      * @param moreInfo  更多异常信息
      * @return 完整异常信息
      */
-    private static String geneErrorMessage(ErrorCode errorCode, String moreInfo) {
+    private static String geneErrorMessage(ErrorCode errorCode, String moreInfo, Object... params) {
         String message = "";
         // 拼接 [错误码:错误信息]
         if (Objects.nonNull(errorCode)) {
@@ -107,7 +115,7 @@ public class GeneralException extends BaseException {
         }
         // 拼接更多异常信息
         if (Objects.nonNull(moreInfo)) {
-            message += moreInfo;
+            message += StrUtil.format(moreInfo, params);
         }
         return message;
     }
