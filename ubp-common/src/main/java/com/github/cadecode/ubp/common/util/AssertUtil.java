@@ -33,6 +33,7 @@ public class AssertUtil {
      *
      * @param expression 布尔表达式
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isTrue(boolean expression, String moreInfo, Object... params) {
         isTrue(expression, () -> GeneralException.of(moreInfo, params));
@@ -44,6 +45,7 @@ public class AssertUtil {
      * @param expression 布尔表达式
      * @param errorCode  错误码
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isTrue(boolean expression, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(expression, () -> GeneralException.of(errorCode, moreInfo, params));
@@ -56,6 +58,7 @@ public class AssertUtil {
      * @param errorCode  错误码
      * @param throwable  caused 异常
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isTrue(boolean expression, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(expression, () -> GeneralException.of(errorCode, throwable, moreInfo, params));
@@ -76,6 +79,7 @@ public class AssertUtil {
      *
      * @param expression 布尔表达式
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isFalse(boolean expression, String moreInfo, Object... params) {
         isTrue(!expression, () -> GeneralException.of(moreInfo, params));
@@ -87,6 +91,7 @@ public class AssertUtil {
      * @param expression 布尔表达式
      * @param errorCode  错误码
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isFalse(boolean expression, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(!expression, () -> GeneralException.of(errorCode, moreInfo, params));
@@ -99,6 +104,7 @@ public class AssertUtil {
      * @param errorCode  错误码
      * @param throwable  caused 异常
      * @param moreInfo   异常信息
+     * @param params 字符串模板参数
      */
     public static void isFalse(boolean expression, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(!expression, () -> GeneralException.of(errorCode, throwable, moreInfo, params));
@@ -119,6 +125,7 @@ public class AssertUtil {
      *
      * @param o        对象
      * @param moreInfo 异常信息
+     * @param params 字符串模板参数
      */
     public static void isNull(Object o, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNull(o), () -> GeneralException.of(moreInfo, params));
@@ -130,6 +137,7 @@ public class AssertUtil {
      * @param o         对象
      * @param errorCode 错误码
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNull(Object o, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNull(o), () -> GeneralException.of(errorCode, moreInfo, params));
@@ -142,6 +150,7 @@ public class AssertUtil {
      * @param errorCode 对象
      * @param throwable caused 异常
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNull(Object o, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNull(o), () -> GeneralException.of(errorCode, throwable, moreInfo, params));
@@ -162,6 +171,7 @@ public class AssertUtil {
      *
      * @param o        对象
      * @param moreInfo 异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotNull(Object o, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotNull(o), () -> GeneralException.of(moreInfo, params));
@@ -173,6 +183,7 @@ public class AssertUtil {
      * @param o         对象
      * @param errorCode 错误码
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotNull(Object o, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotNull(o), () -> GeneralException.of(errorCode, moreInfo, params));
@@ -185,6 +196,7 @@ public class AssertUtil {
      * @param errorCode 对象
      * @param throwable caused 异常
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotNull(Object o, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotNull(o), () -> GeneralException.of(errorCode, throwable, moreInfo, params));
@@ -205,6 +217,7 @@ public class AssertUtil {
      *
      * @param o        对象
      * @param moreInfo 异常信息
+     * @param params 字符串模板参数
      */
     public static void isEmpty(Object o, String moreInfo, Object... params) {
         isTrue(ObjUtil.isEmpty(o), () -> GeneralException.of(moreInfo, params));
@@ -216,6 +229,7 @@ public class AssertUtil {
      * @param o         对象
      * @param errorCode 错误码
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isEmpty(Object o, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(ObjUtil.isEmpty(o), () -> GeneralException.of(errorCode, moreInfo, params));
@@ -228,6 +242,7 @@ public class AssertUtil {
      * @param errorCode 对象
      * @param throwable caused 异常
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isEmpty(Object o, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(ObjUtil.isEmpty(o), () -> GeneralException.of(errorCode, throwable, moreInfo, params));
@@ -248,6 +263,7 @@ public class AssertUtil {
      *
      * @param o        对象
      * @param moreInfo 异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotEmpty(Object o, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotEmpty(o), () -> GeneralException.of(moreInfo, params));
@@ -259,6 +275,7 @@ public class AssertUtil {
      * @param o         对象
      * @param errorCode 错误码
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotEmpty(Object o, ErrorCode errorCode, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotEmpty(o), () -> GeneralException.of(errorCode, moreInfo, params));
@@ -271,6 +288,7 @@ public class AssertUtil {
      * @param errorCode 对象
      * @param throwable caused 异常
      * @param moreInfo  异常信息
+     * @param params 字符串模板参数
      */
     public static void isNotEmpty(Object o, ErrorCode errorCode, Throwable throwable, String moreInfo, Object... params) {
         isTrue(ObjUtil.isNotEmpty(o), () -> GeneralException.of(errorCode, throwable, moreInfo, params));
