@@ -15,5 +15,12 @@
         基础框架
     </description>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
+        </dependency>
+    </dependencies>
+
 
 </project>
