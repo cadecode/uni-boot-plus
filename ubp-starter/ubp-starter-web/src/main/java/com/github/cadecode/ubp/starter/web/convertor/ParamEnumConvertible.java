@@ -11,6 +11,6 @@ public interface ParamEnumConvertible {
     /**
      * 返回枚举元素的对应值
      */
-    String fromParam();
+    String paramValue();
 
 }

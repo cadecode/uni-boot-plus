@@ -40,7 +40,7 @@ public class ParamEnumConvertorFactory implements ConverterFactory<String, Param
 
         public StringEnumConvertor(Class<T> targetType) {
             enumMap = Arrays.stream(targetType.getEnumConstants())
-                    .collect(toMap(ParamEnumConvertible::fromParam, o -> o, (p, n) -> n));
+                    .collect(toMap(ParamEnumConvertible::paramValue, o -> o, (p, n) -> n));
         }
 
         @Override
