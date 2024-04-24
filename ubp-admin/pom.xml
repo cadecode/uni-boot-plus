@@ -16,20 +16,13 @@
     </description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-common</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-framework</artifactId>
