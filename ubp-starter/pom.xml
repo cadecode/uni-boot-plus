@@ -20,4 +20,11 @@
         <module>ubp-starter-log</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-auto</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
