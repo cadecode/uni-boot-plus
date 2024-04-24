@@ -17,6 +17,7 @@
     </description>
     <modules>
         <module>ubp-starter-web</module>
+        <module>ubp-starter-log</module>
     </modules>
 
 </project>
