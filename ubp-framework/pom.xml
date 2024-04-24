@@ -40,6 +40,10 @@
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-log</artifactId>
+        </dependency>
     </dependencies>
 
 
