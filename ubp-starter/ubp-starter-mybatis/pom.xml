@@ -15,6 +15,7 @@
     </description>
 
     <dependencies>
+        <!--mybatis-flex-->
         <dependency>
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-spring-boot3-starter</artifactId>
@@ -22,6 +23,11 @@
         <dependency>
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-processor</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
         </dependency>
     </dependencies>
 
