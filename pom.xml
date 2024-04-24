@@ -51,6 +51,11 @@
                 <artifactId>ubp-starter-log</artifactId>
                 <version>${ubp.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.cadecode</groupId>
+                <artifactId>ubp-starter-actuator</artifactId>
+                <version>${ubp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

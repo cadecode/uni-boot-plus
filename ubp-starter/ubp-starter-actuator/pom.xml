@@ -5,26 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-dependency</artifactId>
+        <artifactId>ubp-starter</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ubp-dependency/pom.xml</relativePath>
     </parent>
 
-    <packaging>pom</packaging>
-    <artifactId>ubp-starter</artifactId>
+    <artifactId>ubp-starter-actuator</artifactId>
     <description>
-        中间件集成
+        系统监控工具集成
     </description>
-    <modules>
-        <module>ubp-starter-web</module>
-        <module>ubp-starter-log</module>
-        <module>ubp-starter-actuator</module>
-    </modules>
 
     <dependencies>
+        <!--actuator-->
         <dependency>
-            <groupId>net.dreamlu</groupId>
-            <artifactId>mica-auto</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!--SpringBootAdmin-->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
         </dependency>
     </dependencies>
 
