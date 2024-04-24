@@ -10,9 +10,13 @@
         <relativePath>../ubp-dependency/pom.xml</relativePath>
     </parent>
 
+    <packaging>pom</packaging>
     <artifactId>ubp-starter</artifactId>
     <description>
         中间件集成
     </description>
+    <modules>
+        <module>ubp-starter-web</module>
+    </modules>
 
 </project>

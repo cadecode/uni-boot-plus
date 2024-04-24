@@ -41,6 +41,11 @@
                 <artifactId>ubp-framework</artifactId>
                 <version>${ubp.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.cadecode</groupId>
+                <artifactId>ubp-starter-web</artifactId>
+                <version>${ubp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
