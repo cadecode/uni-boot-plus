@@ -33,6 +33,7 @@
         <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
         <druid.version>1.2.21</druid.version>
         <mybatis-flex.version>1.8.8</mybatis-flex.version>
+        <pagehelper.version>6.1.0</pagehelper.version>
     </properties>
 
     <dependencies>
@@ -125,6 +126,12 @@
                 <artifactId>mybatis-flex-processor</artifactId>
                 <version>${mybatis-flex.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <!--pagehelper-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
