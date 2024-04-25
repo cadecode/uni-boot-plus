@@ -1,10 +1,51 @@
-server:
-  port: 8000
-
-logging:
-  file:
-    path: /log/ubp/
-
 spring:
   application:
     name: UniBootPlus
+  datasource:
+    # druid
+    druid:
+      socketTimeout: 60000
+      initialSize: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      webStatFilter:
+        enabled: true
+      statViewServlet:
+        enabled: true
+        allow:
+        url-pattern: /druid/*
+        login-username: dev
+        login-password: dev123
+      filter:
+        stat:
+          enabled: true
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+# mybatis
+mybatis-flex:
+  mapper-locations: classpath*:mapper/mysql/**/*.xml
+  type-aliases-package: com.github.cadecode.**.bean,com.github.cadecode.**.mybatis.converter
+  # mybatis 原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+  # mybatis-flex 配置
+  global-config:
+    # 默认 id 生成规则
+    key-config:
+      key-type: generator
+      value: snowFlakeId
+
+

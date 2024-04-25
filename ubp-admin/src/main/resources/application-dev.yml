@@ -1,0 +1,29 @@
+# tomcat
+server:
+  port: 8000
+
+# log
+logging:
+  file:
+    path: /log/ubp/
+
+spring:
+  application:
+    name: UniBootPlus_DEV
+
+# mybatis
+mybatis-flex:
+  # 多数据源
+  datasource:
+    ds1:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/ubp
+      username: root
+      password: dbAdm
+    ds2:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://127.0.0.1:3306/ubp_slave1
+      username: root
+      password: dbAdm
+
+
