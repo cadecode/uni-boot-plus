@@ -15,9 +15,18 @@ public class PageParams {
     @NotNull
     private Integer pageSize = 1;
     @NotNull
-    private Integer pageNumber = 10;
-
-    private Integer total;
+    private Integer pageNum = 10;
 
     private String orderBy;
+
+    /**
+     * 前端回传总数
+     * <p>在第二页时，可以不用查总数
+     */
+    private Integer total;
+
+    /**
+     * 是否需要 count
+     */
+    private Boolean countSql;
 }
