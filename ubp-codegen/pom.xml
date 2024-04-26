@@ -17,6 +17,8 @@
 
     <properties>
         <spring-shell.version>3.2.3</spring-shell.version>
+        <mybatis-flex-codegen.version>1.8.8</mybatis-flex-codegen.version>
+        <screw.version>1.0.5</screw.version>
     </properties>
 
     <dependencies>
@@ -29,12 +31,19 @@
         <dependency>
             <groupId>com.mybatis-flex</groupId>
             <artifactId>mybatis-flex-codegen</artifactId>
+            <version>${mybatis-flex-codegen.version}</version>
         </dependency>
         <!--spring shell-->
         <dependency>
             <groupId>org.springframework.shell</groupId>
             <artifactId>spring-shell-starter</artifactId>
             <version>${spring-shell.version}</version>
+        </dependency>
+        <!--数据库文档生成-->
+        <dependency>
+            <groupId>cn.smallbun.screw</groupId>
+            <artifactId>screw-core</artifactId>
+            <version>${screw.version}</version>
         </dependency>
         <!--数据库驱动-->
         <dependency>

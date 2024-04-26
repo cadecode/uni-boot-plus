@@ -34,7 +34,6 @@
         <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
         <druid.version>1.2.21</druid.version>
         <mybatis-flex.version>1.8.8</mybatis-flex.version>
-        <mybatis-flex-codegen.version>1.8.8</mybatis-flex-codegen.version>
         <pagehelper.version>6.1.0</pagehelper.version>
     </properties>
 
@@ -133,12 +132,6 @@
                 <artifactId>mybatis-flex-processor</artifactId>
                 <version>${mybatis-flex.version}</version>
                 <scope>provided</scope>
-            </dependency>
-            <!--mybatis-flex 代码生成器-->
-            <dependency>
-                <groupId>com.mybatis-flex</groupId>
-                <artifactId>mybatis-flex-codegen</artifactId>
-                <version>${mybatis-flex-codegen.version}</version>
             </dependency>
             <!--pagehelper-->
             <dependency>
