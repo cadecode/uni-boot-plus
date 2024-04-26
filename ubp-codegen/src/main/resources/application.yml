@@ -1,0 +1,11 @@
+spring:
+  # 导入 ubp-admin 配置内容
+  # 开发模式下启动 user.dir 表示项目根目录
+  config:
+    import:
+      - file:${user.dir}\ubp-admin\src\main\resources\application.yml
+      - file:${user.dir}\ubp-admin\src\main\resources\application-${spring.profiles.active}.yml
+  # spring-shell 配置
+  shell:
+    history:
+      name: codegen-shell.log
