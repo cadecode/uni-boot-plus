@@ -21,6 +21,7 @@
         <module>ubp-starter-actuator</module>
         <module>ubp-starter-datasource</module>
         <module>ubp-starter-mybatis</module>
+        <module>ubp-starter-swagger</module>
     </modules>
 
     <dependencies>
