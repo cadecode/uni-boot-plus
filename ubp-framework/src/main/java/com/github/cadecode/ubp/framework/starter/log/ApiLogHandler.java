@@ -1,9 +1,9 @@
-package com.github.cadecode.ubp.framework.handler;
+package com.github.cadecode.ubp.framework.starter.log;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.github.cadecode.ubp.framework.bean.po.SysLog;
 import com.github.cadecode.ubp.starter.log.annotation.ApiLogger;
-import com.github.cadecode.ubp.starter.log.handler.AbstractApiLogHandler;
+import com.github.cadecode.ubp.starter.log.handler.BaseApiLogHandler;
 import com.github.cadecode.ubp.starter.log.model.BaseLogInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class ApiLogHandler extends AbstractApiLogHandler {
+public class ApiLogHandler extends BaseApiLogHandler {
 
     /**
      * 构造 Log 信息对象
@@ -47,6 +47,6 @@ public class ApiLogHandler extends AbstractApiLogHandler {
      */
     @Async
     public void save(ApiLogger apiLogger, Object o) {
-        //
+        // TODO sys_log 保存
     }
 }

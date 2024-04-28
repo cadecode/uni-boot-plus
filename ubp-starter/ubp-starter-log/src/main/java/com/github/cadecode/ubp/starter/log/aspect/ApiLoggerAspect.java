@@ -4,7 +4,7 @@ import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.util.ObjUtil;
 import com.github.cadecode.ubp.common.util.JacksonUtil;
 import com.github.cadecode.ubp.starter.log.annotation.ApiLogger;
-import com.github.cadecode.ubp.starter.log.handler.AbstractApiLogHandler;
+import com.github.cadecode.ubp.starter.log.handler.BaseApiLogHandler;
 import com.github.cadecode.ubp.starter.log.model.LogInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class ApiLoggerAspect {
 
-    private final AbstractApiLogHandler apiLogHandler;
+    private final BaseApiLogHandler baseApiLogHandler;
 
     @Pointcut("@within(com.github.cadecode.ubp.starter.log.annotation.ApiLogger) " +
             "|| @annotation(com.github.cadecode.ubp.starter.log.annotation.ApiLogger)")
@@ -105,12 +105,12 @@ public class ApiLoggerAspect {
             }
             LogInfo baseLogInfo = LogInfo.builder().apiLogger(apiLogger).request(attributes.getRequest())
                     .resultStr(resultStr).timeCost(timeCost).exceptional(exceptional).build();
-            Object logObj = apiLogHandler.generateLog(point, baseLogInfo);
+            Object logObj = baseApiLogHandler.generateLog(point, baseLogInfo);
             // 打印日志
             log.info("API LOG [{}]: {}", apiLogger.type(), JacksonUtil.toJson(logObj));
             // 持久化
             try {
-                apiLogHandler.save(apiLogger, logObj);
+                baseApiLogHandler.save(apiLogger, logObj);
             } catch (Exception e) {
                 log.error("API LOG [{}]: save async fail", apiLogger.type(), e);
             }

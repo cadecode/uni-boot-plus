@@ -25,11 +25,15 @@ import java.util.Map;
  * @since 2023/6/8
  */
 @Slf4j
-public abstract class AbstractApiLogHandler {
+public class BaseApiLogHandler {
 
-    public abstract Object generateLog(ProceedingJoinPoint point, BaseLogInfo baseLogInfo);
+    public Object generateLog(ProceedingJoinPoint point, BaseLogInfo baseLogInfo) {
+        return baseLogInfo;
+    }
 
-    public abstract void save(ApiLogger apiLogger, Object o);
+    public void save(ApiLogger apiLogger, Object o) {
+        log.debug("API LOG [{}]: no implement for log save", apiLogger.type());
+    }
 
     /**
      * 获取方法参数名和参数值
