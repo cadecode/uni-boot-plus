@@ -68,10 +68,12 @@ knife4j:
 
 # 本项目配置
 uni-boot:
+  base-config:
+    version: @ubp.version@
   swagger:
     title: UniBootPlus API Doc
     description: UniBootPlus 接口文档
-    version: @ubp.version@
+    version: ${uni-boot.base-config.version}
     contact-name: Cade
     contact-url: https://github.com/cadecode/uni-boot-plus
     contact-email: cadecode@foxmail.com
