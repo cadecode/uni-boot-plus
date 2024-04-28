@@ -48,4 +48,30 @@ mybatis-flex:
       key-type: generator
       value: snowFlakeId
 
+# swagger
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: framework
+      packages-to-scan: com.github.cadecode.ubp.framework
+    - group: admin
+      packages-to-scan: com.github.cadecode.ubp.admin
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
 
+# 本项目配置
+uni-boot:
+  swagger:
+    title: UniBootPlus API Doc
+    description: UniBootPlus 接口文档
+    version: @ubp.version@
+    contact-name: Cade
+    contact-url: https://github.com/cadecode/uni-boot-plus
+    contact-email: cadecode@foxmail.com
