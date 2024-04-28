@@ -2,6 +2,7 @@ package com.github.cadecode.ubp.framework.starter.log;
 
 import cn.hutool.extra.servlet.JakartaServletUtil;
 import com.github.cadecode.ubp.framework.bean.po.SysLog;
+import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.github.cadecode.ubp.starter.log.annotation.ApiLogger;
 import com.github.cadecode.ubp.starter.log.handler.BaseApiLogHandler;
 import com.github.cadecode.ubp.starter.log.model.BaseLogInfo;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class ApiLogHandler extends BaseApiLogHandler {
+
+    private final SysLogService sysLogService;
 
     /**
      * 构造 Log 信息对象
@@ -47,6 +50,20 @@ public class ApiLogHandler extends BaseApiLogHandler {
      */
     @Async
     public void save(ApiLogger apiLogger, Object o) {
-        // TODO sys_log 保存
+        if (!apiLogger.enableSave()) {
+            return;
+        }
+        SysLog po = (SysLog) o;
+        if (!apiLogger.saveParams()) {
+            po.setRequestParams(null);
+        }
+        if (!apiLogger.saveResult()) {
+            po.setResult(null);
+        }
+        try {
+            sysLogService.save(po);
+        } catch (Exception e) {
+            log.error("API log [{}]: save fail", apiLogger.type(), e);
+        }
     }
 }
