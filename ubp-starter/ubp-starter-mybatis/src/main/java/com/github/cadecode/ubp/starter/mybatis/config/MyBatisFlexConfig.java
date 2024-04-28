@@ -1,7 +1,7 @@
 package com.github.cadecode.ubp.starter.mybatis.config;
 
 import com.github.cadecode.ubp.starter.mybatis.listener.BaseInsertUpdateListener;
-import com.github.cadecode.ubp.starter.mybatis.model.BaseEntity;
+import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.spring.boot.ConfigurationCustomizer;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
 import com.mybatisflex.spring.boot.SqlSessionFactoryBeanCustomizer;
@@ -35,8 +35,8 @@ public class MyBatisFlexConfig {
     @Bean
     public MyBatisFlexCustomizer myBatisFlexCustomizer(BaseInsertUpdateListener baseInsertUpdateListener) {
         return globalConfig -> {
-            globalConfig.registerInsertListener(baseInsertUpdateListener, BaseEntity.class);
-            globalConfig.registerUpdateListener(baseInsertUpdateListener, BaseEntity.class);
+            globalConfig.registerInsertListener(baseInsertUpdateListener, BaseFieldOperable.class);
+            globalConfig.registerUpdateListener(baseInsertUpdateListener, BaseFieldOperable.class);
         };
     }
 

@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.starter.mybatis.listener;
 
-import com.github.cadecode.ubp.starter.mybatis.model.BaseEntity;
+import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.InsertListener;
 import com.mybatisflex.annotation.UpdateListener;
 
@@ -18,15 +18,15 @@ public class BaseInsertUpdateListener implements InsertListener, UpdateListener 
 
     @Override
     public void onInsert(Object entity) {
-        if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setCreateTime(LocalDateTime.now());
+        if (entity instanceof BaseFieldOperable baseFieldOperable) {
+            baseFieldOperable.setCreateTime(LocalDateTime.now());
         }
     }
 
     @Override
     public void onUpdate(Object entity) {
-        if (entity instanceof BaseEntity baseEntity) {
-            baseEntity.setUpdateTime(LocalDateTime.now());
+        if (entity instanceof BaseFieldOperable baseFieldOperable) {
+            baseFieldOperable.setUpdateTime(LocalDateTime.now());
         }
     }
 }
