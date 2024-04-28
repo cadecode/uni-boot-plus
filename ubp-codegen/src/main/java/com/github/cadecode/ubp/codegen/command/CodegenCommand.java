@@ -2,6 +2,7 @@ package com.github.cadecode.ubp.codegen.command;
 
 import cn.hutool.core.date.DateUtil;
 import com.github.cadecode.ubp.codegen.generator.EntityConvertGenerator;
+import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.codegen.Generator;
 import com.mybatisflex.codegen.config.EntityConfig.SwaggerVersion;
 import com.mybatisflex.codegen.config.GlobalConfig;
@@ -14,6 +15,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -46,6 +48,8 @@ public class CodegenCommand {
                 // 开始 swagger doc 版本
                 .setWithSwagger(true)
                 .setSwaggerVersion(SwaggerVersion.DOC)
+                // interface
+                .setImplInterfaces(BaseFieldOperable.class, Serializable.class)
                 .setOverwriteEnable(false);
         // mapper
         globalConfig.enableMapper()
