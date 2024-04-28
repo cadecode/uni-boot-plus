@@ -1,8 +1,12 @@
 package com.github.cadecode.ubp.starter.mybatis.config;
 
+import com.github.cadecode.ubp.starter.mybatis.listener.BaseInsertUpdateListener;
+import com.github.cadecode.ubp.starter.mybatis.model.BaseEntity;
 import com.mybatisflex.spring.boot.ConfigurationCustomizer;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
 import com.mybatisflex.spring.boot.SqlSessionFactoryBeanCustomizer;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -15,6 +19,26 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MyBatisFlexConfig {
+
+    @ConditionalOnMissingBean
+    @Bean
+    public BaseInsertUpdateListener baseInsertUpdateListener() {
+        return new BaseInsertUpdateListener();
+    }
+
+    /**
+     * global-config 配置器示例
+     * <p>
+     * mybatis-flex 自身配置
+     */
+    @ConditionalOnMissingBean
+    @Bean
+    public MyBatisFlexCustomizer myBatisFlexCustomizer(BaseInsertUpdateListener baseInsertUpdateListener) {
+        return globalConfig -> {
+            globalConfig.registerInsertListener(baseInsertUpdateListener, BaseEntity.class);
+            globalConfig.registerUpdateListener(baseInsertUpdateListener, BaseEntity.class);
+        };
+    }
 
     /**
      * config 配置器示例
@@ -34,16 +58,5 @@ public class MyBatisFlexConfig {
     // @Bean
     public SqlSessionFactoryBeanCustomizer sqlSessionFactoryBeanCustomizer() {
         return factoryBean -> {};
-    }
-
-    /**
-     * global-config 配置器示例
-     * <p>
-     * mybatis-flex 自身配置
-     */
-    // @ConditionalOnMissingBean
-    // @Bean
-    public MyBatisFlexCustomizer myBatisFlexCustomizer() {
-        return globalConfig -> {};
     }
 }
