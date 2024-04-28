@@ -3,8 +3,8 @@ spring:
   # 开发模式下启动 user.dir 表示项目根目录
   config:
     import:
-      - file:${user.dir}\ubp-admin\src\main\resources\application.yml
-      - file:${user.dir}\ubp-admin\src\main\resources\application-${spring.profiles.active}.yml
+      - file:${user.dir}\ubp-admin\target\classes\application.yml
+      - file:${user.dir}\ubp-admin\target\classes\application-${spring.profiles.active}.yml
   # spring-shell 配置
   shell:
     history:
