@@ -31,6 +31,10 @@
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-actuator</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-swagger</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -66,6 +66,11 @@
                 <artifactId>ubp-starter-mybatis</artifactId>
                 <version>${ubp.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.cadecode</groupId>
+                <artifactId>ubp-starter-swagger</artifactId>
+                <version>${ubp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
