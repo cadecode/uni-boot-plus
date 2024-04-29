@@ -86,11 +86,15 @@ public class CodegenCommand {
                           @ShellOption(help = "base package",
                                   value = {"base-package", "p"},
                                   defaultValue = "com.github.cadecode.ubp") String basePackage,
+                          @ShellOption(help = "table prefix",
+                                  value = {"table-prefix", "tp"},
+                                  defaultValue = "") String tablePrefix,
                           @ShellOption(help = "table names",
                                   value = {"table-names", "t"},
                                   arity = 1000) String[] tableNames) {
         // 策略配置
         StrategyConfig strategyConfig = globalConfig.getStrategyConfig();
+        strategyConfig.setTablePrefix(tablePrefix);
         strategyConfig.setGenerateTable(tableNames);
 
         // 包配置
