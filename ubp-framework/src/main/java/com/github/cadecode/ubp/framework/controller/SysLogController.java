@@ -26,7 +26,7 @@ import java.util.List;
 @Validated
 @RestController
 @Tag(name = "系统日志接口")
-@RequestMapping("/sysLog")
+@RequestMapping("/sys_log")
 public class SysLogController {
 
     private final SysLogService sysLogService;
@@ -61,9 +61,9 @@ public class SysLogController {
      * @param idList 系统日志主键列表
      * @return 是否删除成功
      */
-    @PostMapping("remove_batch")
+    @PostMapping("remove_by_ids")
     @Operation(description = "根据主键系统日志-批量")
-    public boolean remove(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
+    public boolean removeByIds(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
         return sysLogService.removeByIds(idList);
     }
 
@@ -97,9 +97,9 @@ public class SysLogController {
      * @param idList 系统日志主键列表
      * @return 系统日志详情
      */
-    @PostMapping("list")
+    @PostMapping("list_by_ids")
     @Operation(description = "根据主键查询系统日志-批量")
-    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
+    public List<Object> listByIds(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
 
