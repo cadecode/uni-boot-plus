@@ -7,11 +7,9 @@ package #(packageConfig.controllerPackage);
 #if(controllerConfig.superClass != null)
 import #(controllerConfig.buildSuperClassImport());
 #end
-import #(packageConfig.entityPackage).#(entityClassName);
 import #(packageConfig.servicePackage).#(table.buildServiceClassName());
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
 import com.github.cadecode.ubp.starter.web.model.PageResult;
-import com.mybatisflex.core.paginate.Page;
 #if(withSwagger && swaggerVersion.getName() == "FOX")
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,7 +60,7 @@ import java.util.List;
 #if(withSwagger && swaggerVersion.getName() == "DOC")
 @Tag(name = "#(tableComment)接口")
 #end
-@RequestMapping("/#(firstCharToLowerCase(entityClassName))")
+@RequestMapping("/#(camelToUnderline(entityClassName))")
 public class #(table.buildControllerClassName()) #if(controllerConfig.superClass)extends #(controllerConfig.buildSuperClassName()) #end {
 
     private final #(table.buildServiceClassName()) #(serviceVarName);
@@ -107,14 +105,14 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
      * @param idList #(tableComment)主键列表
      * @return 是否删除成功
      */
-    @PostMapping("remove_batch")
+    @PostMapping("remove_by_ids")
     #if(withSwagger && swaggerVersion.getName() == "FOX")
     @ApiOperation("根据主键#(tableComment)-批量")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(description = "根据主键#(tableComment)-批量")
     #end
-    public boolean remove(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
+    public boolean removeByIds(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
         return #(serviceVarName).removeByIds(idList);
     }
 
@@ -158,14 +156,14 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
      * @param idList #(tableComment)主键列表
      * @return #(tableComment)详情
      */
-    @PostMapping("list")
+    @PostMapping("list_by_ids")
     #if(withSwagger && swaggerVersion.getName() == "FOX")
     @ApiOperation("根据主键查询#(tableComment)-批量")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(description = "根据主键查询#(tableComment)-批量")
     #end
-    public List<Object> list(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
+    public List<Object> listByIds(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
 
