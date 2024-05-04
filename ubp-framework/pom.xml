@@ -70,6 +70,10 @@
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-mybatis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-cache</artifactId>
+        </dependency>
     </dependencies>
 
 
