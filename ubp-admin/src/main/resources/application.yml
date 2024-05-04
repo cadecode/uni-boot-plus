@@ -1,6 +1,15 @@
 spring:
   application:
     name: UniBootPlus
+  data:
+    # redis
+    redis:
+      lettuce:
+        pool:
+          max-active: 8
+          min-idle: 0
+          max-idle: 8
+          max-wait: -1
   datasource:
     # druid
     druid:
@@ -77,3 +86,5 @@ uni-boot:
     contact-name: Cade
     contact-url: https://github.com/cadecode/uni-boot-plus
     contact-email: cadecode@foxmail.com
+  cache:
+    type: dlCacheManager

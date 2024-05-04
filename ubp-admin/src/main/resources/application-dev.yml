@@ -10,6 +10,14 @@ logging:
 spring:
   application:
     name: UniBootPlus_DEV
+  data:
+    # redis
+    redis:
+      host: localhost
+      port: 6379
+      password: redisAdm
+      database: 0
+      timeout: 10s
 
 # mybatis
 mybatis-flex:
