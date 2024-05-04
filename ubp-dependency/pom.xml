@@ -29,7 +29,7 @@
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <guava.vsersion>31.0.1-jre</guava.vsersion>
-        <vavr.vsersion>1.0.0-alpha-4</vavr.vsersion>
+        <vavr.vsersion>0.10.4</vavr.vsersion>
         <mica-auto.version>3.1.3</mica-auto.version>
         <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
         <druid.version>1.2.21</druid.version>
@@ -65,11 +65,11 @@
             <version>${guava.vsersion}</version>
         </dependency>
         <!--vavr-->
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>${vavr.vsersion}</version>
-        </dependency>
+        <!--<dependency>-->
+        <!--    <groupId>io.vavr</groupId>-->
+        <!--    <artifactId>vavr</artifactId>-->
+        <!--    <version>${vavr.vsersion}</version>-->
+        <!--</dependency>-->
         <!--hutool-->
         <dependency>
             <groupId>cn.hutool</groupId>
