@@ -22,6 +22,7 @@
         <module>ubp-starter-datasource</module>
         <module>ubp-starter-mybatis</module>
         <module>ubp-starter-swagger</module>
+        <module>ubp-starter-cache</module>
     </modules>
 
     <dependencies>
