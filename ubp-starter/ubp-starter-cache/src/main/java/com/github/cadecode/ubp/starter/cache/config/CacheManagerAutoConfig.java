@@ -1,8 +1,7 @@
 package com.github.cadecode.ubp.starter.cache.config;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.cadecode.ubp.starter.cache.consts.CacheConst;
-import com.github.cadecode.ubp.starter.cache.l2cache.DLCacheProperties;
+import com.github.cadecode.ubp.starter.cache.consts.CacheManageConst;
 import com.github.cadecode.ubp.starter.cache.l2cache.cache.DLCacheManager;
 import com.github.cadecode.ubp.starter.cache.l2cache.sync.DLCacheRefreshListener;
 import com.github.cadecode.ubp.starter.cache.util.KeyGeneUtil;
@@ -24,7 +23,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * SpringBoot Cache 配置类
+ * Cache Manager 配置类
  *
  * @author Cade Li
  * @since 2022/1/5
@@ -32,28 +31,11 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 @Configuration
 @EnableCaching
-@EnableConfigurationProperties(DLCacheProperties.class)
-public class CacheConfig {
+@EnableConfigurationProperties(CacheProperties.class)
+public class CacheManagerAutoConfig {
 
-    /**
-     * 二级缓存
-     */
-    @ConditionalOnProperty(name = "uni-boot.cache.dl.enable", havingValue = "true")
-    @ConditionalOnMissingBean
-    @Bean(name = CacheConst.CACHE_MANAGER_DL)
-    public DLCacheManager dlCacheManager(DLCacheProperties dlCacheProperties, RedisTemplate<String, Object> redisTemplate) {
-        return new DLCacheManager(dlCacheProperties, redisTemplate);
-    }
-
-    @ConditionalOnProperty(name = "uni-boot.cache.dl.enable", havingValue = "true")
-    @Bean
-    public DLCacheRefreshListener dlCacheRefreshListener(DLCacheManager dlCacheManager, DLCacheProperties dlCacheProperties) {
-        return new DLCacheRefreshListener(dlCacheManager, dlCacheProperties);
-    }
-
-    /// 其他 Cache Manager 配置样例
-
-    // @Bean(name = CacheConst.CACHE_MANAGER_CAFFEINE_5S)
+    @ConditionalOnProperty(name = "uni-boot.cache.type", havingValue = CacheManageConst.CACHE_MANAGER_CAFFEINE_5S)
+    @Bean(name = CacheManageConst.CACHE_MANAGER_CAFFEINE_5S)
     public CaffeineCacheManager caffeineCacheManager5s() {
         CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
         // 过期时间设置为 5 s
@@ -63,14 +45,32 @@ public class CacheConfig {
         return caffeineCacheManager;
     }
 
-    // @Bean(name = CacheConst.CACHE_MANAGER_REDIS_5M)
+    @ConditionalOnProperty(name = "uni-boot.cache.type", havingValue = CacheManageConst.CACHE_MANAGER_REDIS_5M)
+    @Bean(name = CacheManageConst.CACHE_MANAGER_REDIS_5M)
     public RedisCacheManager redisCacheManager5m(RedisTemplate<String, Object> redisTemplate) {
         return geneRedisCacheManager(redisTemplate, 5);
     }
 
-    // @Bean(name = CacheConst.CACHE_MANAGER_REDIS_30M)
+    @ConditionalOnProperty(name = "uni-boot.cache.type", havingValue = CacheManageConst.CACHE_MANAGER_REDIS_30M)
+    @Bean(name = CacheManageConst.CACHE_MANAGER_REDIS_30M)
     public RedisCacheManager redisCacheManager30m(RedisTemplate<String, Object> redisTemplate) {
         return geneRedisCacheManager(redisTemplate, 30);
+    }
+
+    /**
+     * 二级缓存
+     */
+    @ConditionalOnProperty(name = "uni-boot.cache.type", havingValue = CacheManageConst.CACHE_MANAGER_DL)
+    @ConditionalOnMissingBean
+    @Bean(name = CacheManageConst.CACHE_MANAGER_DL)
+    public DLCacheManager dlCacheManager(CacheProperties cacheProperties, RedisTemplate<String, Object> redisTemplate) {
+        return new DLCacheManager(cacheProperties.getDlCache(), redisTemplate);
+    }
+
+    @ConditionalOnProperty(name = "uni-boot.cache.type", havingValue = CacheManageConst.CACHE_MANAGER_DL)
+    @Bean
+    public DLCacheRefreshListener dlCacheRefreshListener(DLCacheManager dlCacheManager, CacheProperties cacheProperties) {
+        return new DLCacheRefreshListener(dlCacheManager, cacheProperties.getDlCache());
     }
 
     private static RedisCacheManager geneRedisCacheManager(RedisTemplate<String, Object> redisTemplate, long minutes) {

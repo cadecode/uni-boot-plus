@@ -1,7 +1,6 @@
 package com.github.cadecode.ubp.starter.cache.l2cache;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Map;
 
@@ -13,10 +12,7 @@ import java.util.Map;
  * @since 2023/6/15
  */
 @Data
-@ConfigurationProperties(prefix = "uni-boot.cache.dl")
 public class DLCacheProperties {
-
-    private boolean enable;
 
     /**
      * 是否存储 null 值
