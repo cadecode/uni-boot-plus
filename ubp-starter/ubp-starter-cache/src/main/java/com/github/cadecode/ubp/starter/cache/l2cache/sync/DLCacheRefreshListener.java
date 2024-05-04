@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.Topic;
-import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.List;
  */
 @Slf4j
 @RequiredArgsConstructor
-@Component
 public class DLCacheRefreshListener extends RedisMessageListener {
 
     public static final ConcurrentHashSet<DLCacheRefreshMsg> SELF_MSG_MAP = new ConcurrentHashSet<>();

@@ -4,9 +4,11 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.cadecode.ubp.starter.cache.consts.CacheConst;
 import com.github.cadecode.ubp.starter.cache.l2cache.DLCacheProperties;
 import com.github.cadecode.ubp.starter.cache.l2cache.cache.DLCacheManager;
+import com.github.cadecode.ubp.starter.cache.l2cache.sync.DLCacheRefreshListener;
 import com.github.cadecode.ubp.starter.cache.util.KeyGeneUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
@@ -36,11 +38,20 @@ public class CacheConfig {
     /**
      * 二级缓存
      */
+    @ConditionalOnProperty(name = "uni-boot.cache.dl.enable", havingValue = "true")
     @ConditionalOnMissingBean
     @Bean(name = CacheConst.CACHE_MANAGER_DL)
-    public DLCacheManager dlCacheManager(DLCacheProperties cacheProperties, RedisTemplate<String, Object> redisTemplate) {
-        return new DLCacheManager(cacheProperties, redisTemplate);
+    public DLCacheManager dlCacheManager(DLCacheProperties dlCacheProperties, RedisTemplate<String, Object> redisTemplate) {
+        return new DLCacheManager(dlCacheProperties, redisTemplate);
     }
+
+    @ConditionalOnProperty(name = "uni-boot.cache.dl.enable", havingValue = "true")
+    @Bean
+    public DLCacheRefreshListener dlCacheRefreshListener(DLCacheManager dlCacheManager, DLCacheProperties dlCacheProperties) {
+        return new DLCacheRefreshListener(dlCacheManager, dlCacheProperties);
+    }
+
+    /// 其他 Cache Manager 配置样例
 
     // @Bean(name = CacheConst.CACHE_MANAGER_CAFFEINE_5S)
     public CaffeineCacheManager caffeineCacheManager5s() {

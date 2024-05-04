@@ -16,6 +16,8 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "uni-boot.cache.dl")
 public class DLCacheProperties {
 
+    private boolean enable;
+
     /**
      * 是否存储 null 值
      */
