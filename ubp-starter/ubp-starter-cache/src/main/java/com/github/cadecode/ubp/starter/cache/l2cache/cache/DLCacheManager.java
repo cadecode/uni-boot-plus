@@ -1,6 +1,5 @@
 package com.github.cadecode.ubp.starter.cache.l2cache.cache;
 
-import cn.hutool.core.util.ObjUtil;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.cadecode.ubp.starter.cache.l2cache.DLCacheProperties;
 import com.github.cadecode.ubp.starter.cache.l2cache.DLCacheProperties.LocalConfig;
@@ -12,6 +11,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -42,11 +42,11 @@ public class DLCacheManager implements CacheManager {
 
     private DLCache buildCache(String name) {
         Caffeine<Object, Object> caffeine = Caffeine.newBuilder();
-        // 设置过期时间 expireAfterWrite
         long expiration = 0;
         // 获取针对 cache name 设置的过期时间
         Map<String, Long> cacheExpirationMap = cacheProperties.getCacheExpirationMap();
-        if (ObjUtil.isNotEmpty(cacheExpirationMap) && cacheExpirationMap.get(name) > 0) {
+        if (Objects.nonNull(cacheExpirationMap) && cacheExpirationMap.containsKey(name)
+                && cacheExpirationMap.get(name) > 0) {
             expiration = cacheExpirationMap.get(name);
         } else if (cacheProperties.getDefaultExpiration() > 0) {
             expiration = cacheProperties.getDefaultExpiration();
@@ -56,11 +56,11 @@ public class DLCacheManager implements CacheManager {
         }
         // 设置参数
         LocalConfig localConfig = cacheProperties.getLocal();
-        if (ObjUtil.isNotNull(localConfig.getInitialCapacity()) && localConfig.getInitialCapacity() > 0) {
+        if (localConfig.getInitialCapacity() > 0) {
             caffeine.initialCapacity(localConfig.getInitialCapacity());
 
         }
-        if (ObjUtil.isNotNull(localConfig.getMaximumSize()) && localConfig.getMaximumSize() > 0) {
+        if (localConfig.getMaximumSize() > 0) {
             caffeine.maximumSize(localConfig.getMaximumSize());
         }
         return new DLCache(name, expiration, cacheProperties, caffeine.build(), redisTemplate);
