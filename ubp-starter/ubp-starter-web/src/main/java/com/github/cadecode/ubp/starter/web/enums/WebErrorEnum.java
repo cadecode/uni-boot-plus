@@ -55,6 +55,12 @@ public enum WebErrorEnum implements ErrorCode {
             return ApiStatus.BAD_REQUEST;
         }
     },
+    NO_RESOURCE_FOUND("WEB_1007", "请求资源不存在") {
+        @Override
+        public int getStatus() {
+            return ApiStatus.NOT_FOUND;
+        }
+    },
     /**
      * 特殊处理接口返回 null 的情况
      */

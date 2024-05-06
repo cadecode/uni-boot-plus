@@ -16,6 +16,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +70,8 @@ public class WebExceptionAdvisor {
         put(TypeMismatchException.class, WebErrorEnum.PARAM_TYPE_CONVERT_ERROR);
         // 请求方法不支持
         put(HttpRequestMethodNotSupportedException.class, WebErrorEnum.METHOD_NO_SUPPORT);
+        // 静态资源不存在
+        put(NoResourceFoundException.class, WebErrorEnum.NO_RESOURCE_FOUND);
     }};
 
     /**
@@ -79,7 +82,8 @@ public class WebExceptionAdvisor {
             HttpMessageNotReadableException.class,
             HttpMediaTypeNotSupportedException.class,
             TypeMismatchException.class,
-            HttpRequestMethodNotSupportedException.class
+            HttpRequestMethodNotSupportedException.class,
+            NoResourceFoundException.class
     })
     public ApiResult<Object> handleMvcException(Exception e, HttpServletRequest request) {
         log.error("Spring MVC Exception Handler =>", e);
