@@ -76,6 +76,11 @@
                 <artifactId>ubp-starter-cache</artifactId>
                 <version>${ubp.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.cadecode</groupId>
+                <artifactId>ubp-starter-security</artifactId>
+                <version>${ubp.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
