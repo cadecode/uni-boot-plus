@@ -75,6 +75,18 @@ knife4j:
   setting:
     language: zh_cn
 
+# sa-token
+sa-token:
+  token-name: token
+  # token 有效期（秒）
+  timeout: 2592000
+  # token 最低活跃频率（秒）
+  active-timeout: 3600
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: true
+
 # 本项目配置
 uni-boot:
   base-config:
@@ -88,3 +100,11 @@ uni-boot:
     contact-email: cadecode@foxmail.com
   cache:
     type: dlCacheManager
+  security:
+    enable-cors: true
+    exclude-path-patterns:
+      - /favicon.ico
+      - /doc.html
+      - /webjars/**
+      - /v3/api-docs/**
+      - /demo/**
