@@ -1,8 +1,14 @@
 package com.github.cadecode.ubp.framework.controller;
 
+import cn.hutool.core.util.ObjUtil;
+import com.github.cadecode.ubp.framework.bean.po.SysLog;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageRequestVo;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageResponseVo;
+import com.github.cadecode.ubp.framework.convert.SysLogConvert;
 import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
 import com.github.cadecode.ubp.starter.web.model.PageResult;
+import com.mybatisflex.core.paginate.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -118,13 +124,23 @@ public class SysLogController {
     /**
      * 分页查询系统日志
      *
-     * @param reqVo 系统日志 VO
+     * @param requestVo 系统日志 VO
      * @return 分页结果
      */
     @PostMapping("page")
     @Operation(description = "分页查询系统日志")
-    public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public PageResult<SysLogPageResponseVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageRequestVo requestVo) {
+        Page<SysLog> page = sysLogService.queryChain()
+                .ge(SysLog::getCreateTime, requestVo.getStartTime(), ObjUtil.isNotEmpty(requestVo.getStartTime()))
+                .le(SysLog::getCreateTime, requestVo.getEndTime(), ObjUtil.isNotEmpty(requestVo.getEndTime()))
+                .in(SysLog::getLogType, requestVo.getLogTypeList(), ObjUtil.isNotEmpty(requestVo.getLogTypeList()))
+                .likeLeft(SysLog::getAccessUser, requestVo.getAccessUser(), ObjUtil.isNotEmpty(requestVo.getAccessUser()))
+                .likeLeft(SysLog::getUrl, requestVo.getUrl(), ObjUtil.isNotEmpty(requestVo.getUrl()))
+                .eq(SysLog::getExceptional, requestVo.getExceptional(), ObjUtil.isNotEmpty(requestVo.getExceptional()))
+                .orderBy(SysLog::getCreateTime, false)
+                .page(Page.of(requestVo.getPageNum(), requestVo.getPageSize()));
+        List<SysLogPageResponseVo> voList = SysLogConvert.INSTANCE.poToPageResponseVo(page.getRecords());
+        return new PageResult<>((int) page.getTotalRow(), voList);
     }
 
 }
