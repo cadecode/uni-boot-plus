@@ -1,6 +1,14 @@
+server:
+  shutdown: graceful
+
 spring:
   application:
     name: UniBootPlus
+  lifecycle:
+    timeout-per-shutdown-phase: 60s
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
   data:
     # redis
     redis:
