@@ -38,7 +38,7 @@ public class SysUserGroupController {
      * @return 是否添加成功
      */
     @PostMapping("save")
-    @Operation(description = "保存系统用户组")
+    @Operation(summary = "保存系统用户组")
     public Object save(@RequestBody @Valid @Parameter(description = "系统用户组") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -50,7 +50,7 @@ public class SysUserGroupController {
      * @return 是否删除成功
      */
     @DeleteMapping("remove/{id}")
-    @Operation(description = "根据主键删除系统用户组")
+    @Operation(summary = "根据主键删除系统用户组")
     public boolean remove(@PathVariable @Parameter(description = "系统用户组主键") Serializable id) {
         return sysUserGroupService.removeById(id);
     }
@@ -62,7 +62,7 @@ public class SysUserGroupController {
      * @return 是否删除成功
      */
     @PostMapping("remove_by_ids")
-    @Operation(description = "根据主键系统用户组-批量")
+    @Operation(summary = "根据主键系统用户组-批量")
     public boolean removeByIds(@RequestBody @NotEmpty @Parameter(description = "系统用户组主键") List<Serializable> idList) {
         return sysUserGroupService.removeByIds(idList);
     }
@@ -74,7 +74,7 @@ public class SysUserGroupController {
      * @return 是否更新成功
      */
     @PutMapping("update")
-    @Operation(description = "根据主键更新系统用户组")
+    @Operation(summary = "根据主键更新系统用户组")
     public boolean update(@RequestBody @Valid @Parameter(description = "系统用户组主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
     }
@@ -86,7 +86,7 @@ public class SysUserGroupController {
      * @return 系统用户组详情
      */
     @GetMapping("get/{id}")
-    @Operation(description = "根据主键查询系统用户组")
+    @Operation(summary = "根据主键查询系统用户组")
     public Object get(@PathVariable @Parameter(description = "系统用户组主键") Serializable id) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -98,7 +98,7 @@ public class SysUserGroupController {
      * @return 系统用户组详情
      */
     @PostMapping("list_by_ids")
-    @Operation(description = "根据主键查询系统用户组-批量")
+    @Operation(summary = "根据主键查询系统用户组-批量")
     public List<Object> listByIds(@RequestBody @NotEmpty @Parameter(description = "系统用户组主键") List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -110,7 +110,7 @@ public class SysUserGroupController {
      * @return 系统用户组详情
      */
     @PostMapping("list")
-    @Operation(description = "根据条件查询系统用户组")
+    @Operation(summary = "根据条件查询系统用户组")
     public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统用户组主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -122,7 +122,7 @@ public class SysUserGroupController {
      * @return 分页结果
      */
     @PostMapping("page")
-    @Operation(description = "分页查询系统用户组")
+    @Operation(summary = "分页查询系统用户组")
     public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }

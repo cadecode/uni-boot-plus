@@ -40,7 +40,7 @@ public class AuthController {
      * @return ApiResult
      */
     @PostMapping("login")
-    @Operation(description = "用户登录")
+    @Operation(summary = "用户登录")
     public SaTokenInfo login(@RequestParam @Parameter(description = "用户 ID") String userId,
                              @RequestParam @Parameter(description = "密码") String password,
                              @RequestParam @Parameter(description = "是否记住我") Boolean rememberMe) {
@@ -72,7 +72,7 @@ public class AuthController {
      * @return 是否登录
      */
     @GetMapping("is_login")
-    @Operation(description = "判断当前用户是否登录")
+    @Operation(summary = "判断当前用户是否登录")
     public Boolean isLogin() {
         return StpUtil.isLogin();
     }
@@ -83,7 +83,7 @@ public class AuthController {
      * @return ApiResult, 用户主动注销
      */
     @GetMapping("logout")
-    @Operation(description = "注销当前用户")
+    @Operation(summary = "注销当前用户")
     public ApiResult<?> logout() {
         StpUtil.logout();
         return ApiResult.error(AuthErrorEnum.TOKEN_LOGOUT);
@@ -95,7 +95,7 @@ public class AuthController {
      * @return 用户信息
      */
     @GetMapping("get_user_info")
-    @Operation(description = "获取当前用户信息")
+    @Operation(summary = "获取当前用户信息")
     public Object getUserInfo() {
         // TODO 获取当前用户信息
         return null;

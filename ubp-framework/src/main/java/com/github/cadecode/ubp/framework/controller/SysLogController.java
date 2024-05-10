@@ -44,7 +44,7 @@ public class SysLogController {
      * @return 是否添加成功
      */
     @PostMapping("save")
-    @Operation(description = "保存系统日志")
+    @Operation(summary = "保存系统日志")
     public Object save(@RequestBody @Valid @Parameter(description = "系统日志") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -56,7 +56,7 @@ public class SysLogController {
      * @return 是否删除成功
      */
     @DeleteMapping("remove/{id}")
-    @Operation(description = "根据主键删除系统日志")
+    @Operation(summary = "根据主键删除系统日志")
     public boolean remove(@PathVariable @Parameter(description = "系统日志主键") Serializable id) {
         return sysLogService.removeById(id);
     }
@@ -68,7 +68,7 @@ public class SysLogController {
      * @return 是否删除成功
      */
     @PostMapping("remove_by_ids")
-    @Operation(description = "根据主键系统日志-批量")
+    @Operation(summary = "根据主键系统日志-批量")
     public boolean removeByIds(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
         return sysLogService.removeByIds(idList);
     }
@@ -80,7 +80,7 @@ public class SysLogController {
      * @return 是否更新成功
      */
     @PutMapping("update")
-    @Operation(description = "根据主键更新系统日志")
+    @Operation(summary = "根据主键更新系统日志")
     public boolean update(@RequestBody @Valid @Parameter(description = "系统日志主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
     }
@@ -92,7 +92,7 @@ public class SysLogController {
      * @return 系统日志详情
      */
     @GetMapping("get/{id}")
-    @Operation(description = "根据主键查询系统日志")
+    @Operation(summary = "根据主键查询系统日志")
     public Object get(@PathVariable @Parameter(description = "系统日志主键") Serializable id) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -104,7 +104,7 @@ public class SysLogController {
      * @return 系统日志详情
      */
     @PostMapping("list_by_ids")
-    @Operation(description = "根据主键查询系统日志-批量")
+    @Operation(summary = "根据主键查询系统日志-批量")
     public List<Object> listByIds(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -116,7 +116,7 @@ public class SysLogController {
      * @return 系统日志详情
      */
     @PostMapping("list")
-    @Operation(description = "根据条件查询系统日志")
+    @Operation(summary = "根据条件查询系统日志")
     public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -128,7 +128,7 @@ public class SysLogController {
      * @return 分页结果
      */
     @PostMapping("page")
-    @Operation(description = "分页查询系统日志")
+    @Operation(summary = "分页查询系统日志")
     public PageResult<SysLogPageResponseVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageRequestVo requestVo) {
         Page<SysLog> page = sysLogService.queryChain()
                 .ge(SysLog::getCreateTime, requestVo.getStartTime(), ObjUtil.isNotEmpty(requestVo.getStartTime()))

@@ -38,7 +38,7 @@ public class SysRolePermissionController {
      * @return 是否添加成功
      */
     @PostMapping("save")
-    @Operation(description = "保存角色权限关系")
+    @Operation(summary = "保存角色权限关系")
     public Object save(@RequestBody @Valid @Parameter(description = "角色权限关系") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -50,7 +50,7 @@ public class SysRolePermissionController {
      * @return 是否删除成功
      */
     @DeleteMapping("remove/{id}")
-    @Operation(description = "根据主键删除角色权限关系")
+    @Operation(summary = "根据主键删除角色权限关系")
     public boolean remove(@PathVariable @Parameter(description = "角色权限关系主键") Serializable id) {
         return sysRolePermissionService.removeById(id);
     }
@@ -62,7 +62,7 @@ public class SysRolePermissionController {
      * @return 是否删除成功
      */
     @PostMapping("remove_by_ids")
-    @Operation(description = "根据主键角色权限关系-批量")
+    @Operation(summary = "根据主键角色权限关系-批量")
     public boolean removeByIds(@RequestBody @NotEmpty @Parameter(description = "角色权限关系主键") List<Serializable> idList) {
         return sysRolePermissionService.removeByIds(idList);
     }
@@ -74,7 +74,7 @@ public class SysRolePermissionController {
      * @return 是否更新成功
      */
     @PutMapping("update")
-    @Operation(description = "根据主键更新角色权限关系")
+    @Operation(summary = "根据主键更新角色权限关系")
     public boolean update(@RequestBody @Valid @Parameter(description = "角色权限关系主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
     }
@@ -86,7 +86,7 @@ public class SysRolePermissionController {
      * @return 角色权限关系详情
      */
     @GetMapping("get/{id}")
-    @Operation(description = "根据主键查询角色权限关系")
+    @Operation(summary = "根据主键查询角色权限关系")
     public Object get(@PathVariable @Parameter(description = "角色权限关系主键") Serializable id) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -98,7 +98,7 @@ public class SysRolePermissionController {
      * @return 角色权限关系详情
      */
     @PostMapping("list_by_ids")
-    @Operation(description = "根据主键查询角色权限关系-批量")
+    @Operation(summary = "根据主键查询角色权限关系-批量")
     public List<Object> listByIds(@RequestBody @NotEmpty @Parameter(description = "角色权限关系主键") List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
     }
@@ -110,7 +110,7 @@ public class SysRolePermissionController {
      * @return 角色权限关系详情
      */
     @PostMapping("list")
-    @Operation(description = "根据条件查询角色权限关系")
+    @Operation(summary = "根据条件查询角色权限关系")
     public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "角色权限关系主键") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
@@ -122,7 +122,7 @@ public class SysRolePermissionController {
      * @return 分页结果
      */
     @PostMapping("page")
-    @Operation(description = "分页查询角色权限关系")
+    @Operation(summary = "分页查询角色权限关系")
     public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
     }
