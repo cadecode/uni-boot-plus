@@ -60,7 +60,7 @@ public class SysUser implements BaseFieldOperable, Serializable {
      * 是否启用
      */
     @Schema(description = "是否启用")
-    private Integer enableFlag;
+    private Boolean enableFlag;
 
     /**
      * 性别
