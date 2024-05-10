@@ -2,6 +2,7 @@ package com.github.cadecode.ubp.admin.bean.po;
 
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;
+import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ public class SysUserGroup implements BaseFieldOperable, Serializable {
     /**
      * 用户组 ID
      */
-    @Id
+    @Id(keyType = KeyType.None)
     @Schema(description = "用户组 ID")
     private String userGroupId;
 
