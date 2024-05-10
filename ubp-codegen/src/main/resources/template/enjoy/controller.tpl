@@ -76,7 +76,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("保存#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "保存#(tableComment)")
+    @Operation(summary = "保存#(tableComment)")
     #end
     public Object save(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)")#end  Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
@@ -93,7 +93,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据主键删除#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据主键删除#(tableComment)")
+    @Operation(summary = "根据主键删除#(tableComment)")
     #end
     public boolean remove(@PathVariable #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Serializable id) {
         return #(serviceVarName).removeById(id);
@@ -110,7 +110,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据主键#(tableComment)-批量")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据主键#(tableComment)-批量")
+    @Operation(summary = "根据主键#(tableComment)-批量")
     #end
     public boolean removeByIds(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
         return #(serviceVarName).removeByIds(idList);
@@ -127,7 +127,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据主键更新#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据主键更新#(tableComment)")
+    @Operation(summary = "根据主键更新#(tableComment)")
     #end
     public boolean update(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
@@ -144,7 +144,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据主键查询#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据主键查询#(tableComment)")
+    @Operation(summary = "根据主键查询#(tableComment)")
     #end
     public Object get(@PathVariable #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Serializable id) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
@@ -161,7 +161,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据主键查询#(tableComment)-批量")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据主键查询#(tableComment)-批量")
+    @Operation(summary = "根据主键查询#(tableComment)-批量")
     #end
     public List<Object> listByIds(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  List<Serializable> idList) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示响应");
@@ -178,7 +178,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("根据条件查询#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "根据条件查询#(tableComment)")
+    @Operation(summary = "根据条件查询#(tableComment)")
     #end
     public List<Object> list(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
@@ -195,7 +195,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     @ApiOperation("分页查询#(tableComment)")
     #end
     #if(withSwagger && swaggerVersion.getName() == "DOC")
-    @Operation(description = "分页查询#(tableComment)")
+    @Operation(summary = "分页查询#(tableComment)")
     #end
     public PageResult<Object> page(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("分页信息") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "分页信息")#end  Object reqVo) {
         throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
