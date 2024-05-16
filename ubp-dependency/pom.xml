@@ -65,11 +65,11 @@
             <version>${guava.vsersion}</version>
         </dependency>
         <!--vavr-->
-        <!--<dependency>-->
-        <!--    <groupId>io.vavr</groupId>-->
-        <!--    <artifactId>vavr</artifactId>-->
-        <!--    <version>${vavr.vsersion}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+            <version>${vavr.vsersion}</version>
+        </dependency>
         <!--hutool-->
         <dependency>
             <groupId>cn.hutool</groupId>
