@@ -1,12 +1,12 @@
 package com.github.cadecode.ubp.admin.controller;
 
-import cn.dev33.satoken.secure.SaSecureUtil;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.github.cadecode.ubp.admin.bean.po.SysUser;
 import com.github.cadecode.ubp.admin.service.SysUserService;
 import com.github.cadecode.ubp.common.exception.GeneralException;
 import com.github.cadecode.ubp.framework.enums.AuthErrorEnum;
+import com.github.cadecode.ubp.starter.security.encrypt.PasswordEncryptor;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
 import com.github.cadecode.ubp.starter.web.model.ApiResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +32,8 @@ import java.util.Objects;
 @RequestMapping("/auth")
 public class AuthController {
 
+    private final PasswordEncryptor passwordEncryptor;
+
     private final SysUserService sysUserService;
 
     /**
@@ -54,8 +56,7 @@ public class AuthController {
             throw GeneralException.of(AuthErrorEnum.TOKEN_CREATE_ERROR, "账号已被关闭");
         }
         // 3. 校验密码
-        String securedPassword = SaSecureUtil.sha256(password);
-        if (!Objects.equals(securedPassword, sysUser.getPassword())) {
+        if (!passwordEncryptor.validate(sysUser.getPassword(), null, password)) {
             throw GeneralException.of(AuthErrorEnum.TOKEN_CREATE_ERROR, "密码错误");
         }
         // 4. 登录
