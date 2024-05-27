@@ -26,6 +26,7 @@
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!--自定义配置-->
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+        <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
         <ubp.version>${project.version}</ubp.version>
     </properties>
 
@@ -150,6 +151,24 @@
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
+            </plugin>
+            <!--git hooks 管理插件-->
+            <plugin>
+                <groupId>com.rudikershaw.gitbuildhook</groupId>
+                <artifactId>git-build-hook-maven-plugin</artifactId>
+                <version>${git-build-hook-maven-plugin.version}</version>
+                <configuration>
+                    <gitConfig>
+                        <core.hooksPath>ci/git-hooks</core.hooksPath>
+                    </gitConfig>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>configure</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
