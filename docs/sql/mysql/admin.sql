@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS sys_user
     user_name     VARCHAR(50)  NOT NULL COMMENT '用户名称',
     user_group_id VARCHAR(50)  NOT NULL COMMENT '用户组 ID',
     enable_flag   TINYINT      NOT NULL COMMENT '是否启用',
+    avatar VARCHAR(200) NULL COMMENT '头像',
     sex           CHAR(1)      NULL COMMENT '性别',
     mail          VARCHAR(50)  NULL COMMENT '邮箱',
     phone         VARCHAR(50)  NULL COMMENT '电话',

@@ -63,6 +63,12 @@ public class SysUser implements BaseFieldOperable, Serializable {
     private Boolean enableFlag;
 
     /**
+     * 头像
+     */
+    @Schema(description = "头像")
+    private String avatar;
+
+    /**
      * 性别
      */
     @Schema(description = "性别")
