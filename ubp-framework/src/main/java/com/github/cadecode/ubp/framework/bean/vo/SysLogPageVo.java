@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +38,7 @@ public class SysLogPageVo {
     @Data
     public static class SysLogPageResponseVo {
         @Schema(description = "ID")
-        private BigInteger id;
+        private Long id;
         @Schema(description = "log 类型")
         private String logType;
         @Schema(description = "URL")

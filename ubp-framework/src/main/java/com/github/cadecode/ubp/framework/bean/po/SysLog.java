@@ -3,11 +3,6 @@ package com.github.cadecode.ubp.framework.bean.po;
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.Table;
-
-import java.io.Serializable;
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * 系统日志 实体类
@@ -38,7 +35,7 @@ public class SysLog implements BaseFieldOperable, Serializable {
      */
     @Id
     @Schema(description = "ID")
-    private BigInteger id;
+    private Long id;
 
     /**
      * log 类型
