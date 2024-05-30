@@ -3,6 +3,7 @@ package com.github.cadecode.ubp.admin.serviceimpl;
 import com.github.cadecode.ubp.admin.bean.po.SysPermission;
 import com.github.cadecode.ubp.admin.bean.po.SysRole;
 import com.github.cadecode.ubp.admin.bean.po.SysRolePermission;
+import com.github.cadecode.ubp.admin.enums.PermissionTypeEnum;
 import com.github.cadecode.ubp.admin.mapper.SysRolePermissionMapper;
 import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
 import com.mybatisflex.core.query.QueryChain;
@@ -29,11 +30,12 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Override
     public List<String> listRoleIdByLoginId(Object loginId) {
         return QueryChain.of(SysRole.class)
-                .select(SYS_ROLE.ROLE_ID)
+                .select(SYS_ROLE.ROLE_CODE)
                 .from(SYS_ROLE)
-                .innerJoin(SYS_ROLE_USER).on(SYS_ROLE_USER.ROLE_ID.eq(SYS_ROLE.ROLE_ID))
-                .innerJoin(SYS_USER).on(SYS_ROLE_USER.USER_ID.eq(SYS_USER.USER_ID))
-                .where(SYS_USER.USER_ID.eq(loginId))
+                .innerJoin(SYS_ROLE_USER).on(SYS_ROLE_USER.ROLE_ID.eq(SYS_ROLE.ID))
+                .innerJoin(SYS_USER).on(SYS_ROLE_USER.USER_ID.eq(SYS_USER.ID))
+                .where(SYS_USER.USERNAME.eq(loginId))
+                .and(SYS_ROLE.STATUS.eq(true))
                 .listAs(String.class);
     }
 
@@ -45,11 +47,13 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     @Override
     public List<String> listPermissionIdByRoleId(List<String> roleIds) {
         return QueryChain.of(SysPermission.class)
-                .select(SYS_PERMISSION.PERMISSION_ID)
+                .select(SYS_PERMISSION.PERMISSION_CODE)
                 .from(SYS_PERMISSION)
-                .innerJoin(SYS_ROLE_PERMISSION).on(SYS_ROLE_PERMISSION.PERMISSION_ID.eq(SYS_PERMISSION.PERMISSION_ID))
-                .innerJoin(SYS_ROLE).on(SYS_ROLE_PERMISSION.ROLE_ID.eq(SYS_ROLE.ROLE_ID))
-                .where(SYS_ROLE.ROLE_ID.in(roleIds))
+                .innerJoin(SYS_ROLE_PERMISSION).on(SYS_ROLE_PERMISSION.PERMISSION_ID.eq(SYS_PERMISSION.ID))
+                .innerJoin(SYS_ROLE).on(SYS_ROLE_PERMISSION.ROLE_ID.eq(SYS_ROLE.ID))
+                .where(SYS_ROLE.ROLE_CODE.in(roleIds))
+                .and(SYS_PERMISSION.PERMISSION_TYPE.eq(PermissionTypeEnum.API))
+                .and(SYS_PERMISSION.STATUS.eq(true))
                 .listAs(String.class);
     }
 }

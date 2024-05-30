@@ -28,12 +28,18 @@ public class SysRolePermission implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 角色 ID
+     */
     @Id
     @Schema(description = "角色 ID")
-    private String roleId;
+    private Long roleId;
 
+    /**
+     * 权限 ID
+     */
     @Id
     @Schema(description = "权限 ID")
-    private String permissionId;
+    private Long permissionId;
 
 }

@@ -2,7 +2,6 @@ package com.github.cadecode.ubp.admin.bean.po;
 
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -32,11 +31,29 @@ public class SysUser implements BaseFieldOperable, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户 ID
+     * ID
      */
-    @Id(keyType = KeyType.None)
-    @Schema(description = "用户 ID")
-    private String userId;
+    @Id
+    @Schema(description = "ID")
+    private Long id;
+
+    /**
+     * 用户名
+     */
+    @Schema(description = "用户名")
+    private String username;
+
+    /**
+     * 昵称
+     */
+    @Schema(description = "昵称")
+    private String nickname;
+
+    /**
+     * 用户组 ID
+     */
+    @Schema(description = "用户组 ID")
+    private Long groupId;
 
     /**
      * 密码
@@ -45,22 +62,10 @@ public class SysUser implements BaseFieldOperable, Serializable {
     private String password;
 
     /**
-     * 用户名称
+     * 状态
      */
-    @Schema(description = "用户名称")
-    private String userName;
-
-    /**
-     * 用户组 ID
-     */
-    @Schema(description = "用户组 ID")
-    private String userGroupId;
-
-    /**
-     * 是否启用
-     */
-    @Schema(description = "是否启用")
-    private Boolean enableFlag;
+    @Schema(description = "状态")
+    private Boolean status;
 
     /**
      * 头像

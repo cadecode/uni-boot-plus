@@ -28,12 +28,18 @@ public class SysRoleUser implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 角色 ID
+     */
     @Id
     @Schema(description = "角色 ID")
-    private String roleId;
+    private Long roleId;
 
+    /**
+     * 用户 ID
+     */
     @Id
     @Schema(description = "用户 ID")
-    private String userId;
+    private Long userId;
 
 }

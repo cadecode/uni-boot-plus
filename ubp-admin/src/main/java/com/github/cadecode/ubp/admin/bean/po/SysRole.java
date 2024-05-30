@@ -2,7 +2,6 @@ package com.github.cadecode.ubp.admin.bean.po;
 
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -32,11 +31,17 @@ public class SysRole implements BaseFieldOperable, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 角色 ID
+     * ID
      */
-    @Id(keyType = KeyType.None)
-    @Schema(description = "角色 ID")
-    private String roleId;
+    @Id
+    @Schema(description = "ID")
+    private Long id;
+
+    /**
+     * 角色代码
+     */
+    @Schema(description = "角色代码")
+    private String roleCode;
 
     /**
      * 角色名称
@@ -45,10 +50,16 @@ public class SysRole implements BaseFieldOperable, Serializable {
     private String roleName;
 
     /**
-     * 角色描述
+     * 状态
      */
-    @Schema(description = "角色描述")
-    private String description;
+    @Schema(description = "状态")
+    private Boolean status;
+
+    /**
+     * 备注
+     */
+    @Schema(description = "备注")
+    private String remark;
 
     /**
      * 创建时间

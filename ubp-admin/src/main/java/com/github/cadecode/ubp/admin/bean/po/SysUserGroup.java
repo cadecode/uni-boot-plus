@@ -2,7 +2,6 @@ package com.github.cadecode.ubp.admin.bean.po;
 
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;
-import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -32,23 +31,29 @@ public class SysUserGroup implements BaseFieldOperable, Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 用户组 ID
+     * ID
      */
-    @Id(keyType = KeyType.None)
-    @Schema(description = "用户组 ID")
-    private String userGroupId;
+    @Id
+    @Schema(description = "ID")
+    private Long id;
+
+    /**
+     * 用户组名
+     */
+    @Schema(description = "用户组名")
+    private String groupName;
+
+    /**
+     * 状态
+     */
+    @Schema(description = "状态")
+    private Boolean status;
 
     /**
      * 父级 ID
      */
     @Schema(description = "父级 ID")
-    private String parentGroupId;
-
-    /**
-     * 用户组名称
-     */
-    @Schema(description = "用户组名称")
-    private String userGroupName;
+    private Long parentId;
 
     /**
      * 排序
@@ -57,15 +62,15 @@ public class SysUserGroup implements BaseFieldOperable, Serializable {
     private Integer orderNum;
 
     /**
-     * 祖先部门
+     * 祖先 ID
      */
-    @Schema(description = "祖先部门")
+    @Schema(description = "祖先 ID")
     private String ancestors;
 
     /**
-     * 领导名
+     * 领导
      */
-    @Schema(description = "领导名")
+    @Schema(description = "领导")
     private String leader;
 
     /**
@@ -91,6 +96,12 @@ public class SysUserGroup implements BaseFieldOperable, Serializable {
      */
     @Schema(description = "其他租户标识（作用于删改查）")
     private String otherTenants;
+
+    /**
+     * 备注
+     */
+    @Schema(description = "备注")
+    private String remark;
 
     /**
      * 创建时间
