@@ -52,7 +52,7 @@ public class SaTokenExceptionAdvisor {
      */
     @ExceptionHandler(value = SaTokenException.class)
     public ApiResult<Object> handleSaTokenException(SaTokenException e, HttpServletRequest request) {
-        log.error("SaToken Exception =>", e);
+        log.error("Handle saToken exception, uri:{} =>", request.getRequestURI(), e);
         // 获取或者生成 ErrorCode
         ErrorCode errorCode;
         if (SA_AUTH_ERROR_MAP.containsKey(e.getCode())) {

@@ -4,6 +4,7 @@ import com.github.cadecode.ubp.common.enums.ErrorCode;
 import com.github.cadecode.ubp.common.exception.GeneralException;
 import com.github.cadecode.ubp.starter.web.enums.WebErrorEnum;
 import com.github.cadecode.ubp.starter.web.model.ApiResult;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -22,8 +23,8 @@ public class GeneralExceptionAdvisor {
      * 处理 GeneralException
      */
     @ExceptionHandler(GeneralException.class)
-    public ApiResult<Object> handleGeneralException(GeneralException e) {
-        log.error("General Exception =>", e);
+    public ApiResult<Object> handleGeneralException(GeneralException e, HttpServletRequest request) {
+        log.error("Handle general exception, uri:{} =>", request.getRequestURI(), e);
         // 特殊处理接口返回 null 的情况
         if (WebErrorEnum.RES_BODY_NULL.getCode().equals(e.getErrorCode().getCode())) {
             return ApiResult.ok(null);
@@ -35,8 +36,8 @@ public class GeneralExceptionAdvisor {
      * 兜底处理一般异常
      */
     @ExceptionHandler(Exception.class)
-    public ApiResult<Object> handleException(Exception e) {
-        log.error("Exception =>", e);
+    public ApiResult<Object> handleException(Exception e, HttpServletRequest request) {
+        log.error("Handle exception, uri:{} =>", request.getRequestURI(), e);
         return ApiResult.error(ErrorCode.UNKNOWN).moreInfo(e.getMessage());
     }
 }
