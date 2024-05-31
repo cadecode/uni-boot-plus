@@ -39,7 +39,7 @@ public class WebExceptionAdvisor {
      */
     @ExceptionHandler(value = RateLimitException.class)
     public ApiResult<Object> handleValidationException(RateLimitException e, HttpServletRequest request) {
-        log.error("RateLimit Exception =>", e);
+        log.error("Handle rateLimit exception, uri:{} =>", request.getRequestURI(), e);
         return ApiResult.error(WebErrorEnum.REQUEST_RATE_LIMITED).moreInfo("请稍后再尝试访问").path(request.getRequestURI());
     }
 
@@ -48,7 +48,7 @@ public class WebExceptionAdvisor {
      */
     @ExceptionHandler(value = BindException.class)
     public ApiResult<Object> handleValidationException(BindException e, HttpServletRequest request) {
-        log.error("Validation Exception =>", e);
+        log.error("Handle validation exception, uri:{} =>", request.getRequestURI(), e);
         // 获取错误信息，并拼接
         String msg = e.getBindingResult().getFieldErrors().stream()
                 .map(o -> "[" + o.getField() + "]" + o.getDefaultMessage())
@@ -86,7 +86,7 @@ public class WebExceptionAdvisor {
             NoResourceFoundException.class
     })
     public ApiResult<Object> handleMvcException(Exception e, HttpServletRequest request) {
-        log.error("Spring MVC Exception Handler =>", e);
+        log.error("Handle spring mvc exception, uri:{} =>", request.getRequestURI(), e);
         String requestURI = request.getRequestURI();
         // 根据异常类型查找 map 中的 code 枚举
         ErrorCode errorCode = MVC_EXP_CODE_MAP.entrySet()
