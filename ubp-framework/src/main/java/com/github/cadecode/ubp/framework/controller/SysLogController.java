@@ -1,9 +1,8 @@
 package com.github.cadecode.ubp.framework.controller;
 
-import cn.hutool.core.util.ObjUtil;
 import com.github.cadecode.ubp.framework.bean.po.SysLog;
-import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageRequestVo;
-import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageResponseVo;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageReqVo;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageRespVo;
 import com.github.cadecode.ubp.framework.convert.SysLogConvert;
 import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
@@ -124,22 +123,21 @@ public class SysLogController {
     /**
      * 分页查询系统日志
      *
-     * @param requestVo 系统日志 VO
+     * @param reqVo 系统日志 VO
      * @return 分页结果
      */
     @PostMapping("page")
     @Operation(summary = "分页查询系统日志")
-    public PageResult<SysLogPageResponseVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageRequestVo requestVo) {
+    public PageResult<SysLogPageRespVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageReqVo reqVo) {
         Page<SysLog> page = sysLogService.queryChain()
-                .ge(SysLog::getCreateTime, requestVo.getStartTime(), ObjUtil.isNotEmpty(requestVo.getStartTime()))
-                .le(SysLog::getCreateTime, requestVo.getEndTime(), ObjUtil.isNotEmpty(requestVo.getEndTime()))
-                .in(SysLog::getLogType, requestVo.getLogTypeList(), ObjUtil.isNotEmpty(requestVo.getLogTypeList()))
-                .likeLeft(SysLog::getAccessUser, requestVo.getAccessUser(), ObjUtil.isNotEmpty(requestVo.getAccessUser()))
-                .likeLeft(SysLog::getUrl, requestVo.getUrl(), ObjUtil.isNotEmpty(requestVo.getUrl()))
-                .eq(SysLog::getExceptional, requestVo.getExceptional(), ObjUtil.isNotEmpty(requestVo.getExceptional()))
+                .where(SysLog::getCreateTime).between(reqVo.getStartTime(), reqVo.getEndTime())
+                .and(SysLog::getLogType).in(reqVo.getLogTypeList())
+                .and(SysLog::getAccessUser).likeLeft(reqVo.getAccessUser())
+                .and(SysLog::getUrl).likeLeft(reqVo.getUrl())
+                .and(SysLog::getExceptional).eq(reqVo.getExceptional())
                 .orderBy(SysLog::getCreateTime, false)
-                .page(Page.of(requestVo.getPageNum(), requestVo.getPageSize()));
-        List<SysLogPageResponseVo> voList = SysLogConvert.INSTANCE.poToPageResponseVo(page.getRecords());
+                .page(Page.of(reqVo.getPageNum(), reqVo.getPageSize()));
+        List<SysLogPageRespVo> voList = SysLogConvert.INSTANCE.poToPageRespVo(page.getRecords());
         return new PageResult<>((int) page.getTotalRow(), voList);
     }
 
