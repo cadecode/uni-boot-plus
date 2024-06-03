@@ -1,7 +1,7 @@
 package com.github.cadecode.ubp.framework.convert;
 
 import com.github.cadecode.ubp.framework.bean.po.SysLog;
-import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageResponseVo;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageRespVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,7 +18,7 @@ public interface SysLogConvert {
 
     SysLogConvert INSTANCE = Mappers.getMapper(SysLogConvert.class);
 
-    SysLogPageResponseVo poToPageResponseVo(SysLog po);
+    SysLogPageRespVo poToPageRespVo(SysLog po);
 
-    List<SysLogPageResponseVo> poToPageResponseVo(List<SysLog> poList);
+    List<SysLogPageRespVo> poToPageRespVo(List<SysLog> poList);
 }

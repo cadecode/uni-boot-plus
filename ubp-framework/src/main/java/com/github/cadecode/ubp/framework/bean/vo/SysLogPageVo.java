@@ -20,7 +20,7 @@ public class SysLogPageVo {
     @Schema(description = "系统日志 VO 分页请求")
     @Data
     @EqualsAndHashCode(callSuper = true)
-    public static class SysLogPageRequestVo extends PageParams {
+    public static class SysLogPageReqVo extends PageParams {
         @Schema(description = "开始时间")
         private Date startTime;
         @Schema(description = "接收时间")
@@ -35,8 +35,9 @@ public class SysLogPageVo {
         private String accessUser;
     }
 
+    @Schema(description = "系统日志 VO 分页响应")
     @Data
-    public static class SysLogPageResponseVo {
+    public static class SysLogPageRespVo {
         @Schema(description = "ID")
         private Long id;
         @Schema(description = "log 类型")
