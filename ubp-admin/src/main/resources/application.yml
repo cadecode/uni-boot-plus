@@ -85,12 +85,15 @@ knife4j:
 
 # sa-token
 sa-token:
+  # token header/cookie key
   token-name: token
   # token 有效期（秒）
   timeout: 2592000
   # token 最低活跃频率（秒）
   active-timeout: 3600
+  # 是否允许多地登录
   is-concurrent: true
+  # 多次登录是否共享 token
   is-share: true
   token-style: uuid
   is-log: true
@@ -109,10 +112,11 @@ uni-boot:
   cache:
     type: dlCacheManager
   security:
+    # 允许跨域
     enable-cors: true
     exclude-path-patterns:
-      - /favicon.ico
+      # 排除 swagger 相关
       - /doc.html
-      - /webjars/**
       - /v3/api-docs/**
+      # 排除 demo 接口
       - /demo/**
