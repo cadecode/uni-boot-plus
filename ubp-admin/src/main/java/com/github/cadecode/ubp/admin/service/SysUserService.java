@@ -11,4 +11,8 @@ import com.mybatisflex.core.service.IService;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    void updateUserLoginInfo(SysUser sysUser);
+
+    void updateUserLoginInfoAsync(SysUser sysUser);
+
 }
