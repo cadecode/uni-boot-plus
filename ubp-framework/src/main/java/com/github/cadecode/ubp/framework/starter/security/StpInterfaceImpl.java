@@ -1,9 +1,6 @@
 package com.github.cadecode.ubp.framework.starter.security;
 
-import cn.dev33.satoken.session.SaSession;
-import cn.dev33.satoken.session.SaSessionCustomUtil;
 import cn.dev33.satoken.stp.StpInterface;
-import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +17,6 @@ import java.util.List;
 @Component
 public class StpInterfaceImpl implements StpInterface {
 
-    public static final String ROLE_LIST_KEY = "role_list";
-    public static final String PERMISSION_LIST_KEY = "permission_list";
-
     private final RolePermissionService rolePermissionService;
 
     /**
@@ -32,10 +26,9 @@ public class StpInterfaceImpl implements StpInterface {
     public List<String> getPermissionList(Object loginId, String loginType) {
         List<String> permissionList = new ArrayList<>();
         List<String> roleList = getRoleList(loginId, loginType);
-        for (String roleId : roleList) {
-            SaSession roleCustomSession = SaSessionCustomUtil.getSessionById("role-" + roleId);
-            List<String> list = roleCustomSession.get(PERMISSION_LIST_KEY, () -> rolePermissionService.listPermissionIdByRoleId(roleId));
-            permissionList.addAll(list);
+        for (String role : roleList) {
+            List<String> permissions = rolePermissionService.listPermissionIdByRoleId(role);
+            permissionList.addAll(permissions);
         }
         return permissionList;
     }
@@ -45,8 +38,7 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        SaSession accountSession = StpUtil.getSessionByLoginId(loginId);
-        return accountSession.get(ROLE_LIST_KEY, () -> rolePermissionService.listRoleIdByLoginId(loginId));
+        return rolePermissionService.listRoleIdByLoginId(loginId);
     }
 
 }
