@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
+import static com.github.cadecode.ubp.framework.bean.po.table.SysLogTableDef.SYS_LOG;
+
 /**
  * 系统日志 控制层
  *
@@ -130,12 +132,12 @@ public class SysLogController {
     @Operation(summary = "分页查询系统日志")
     public PageResult<SysLogPageRespVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageReqVo reqVo) {
         Page<SysLog> page = sysLogService.queryChain()
-                .where(SysLog::getCreateTime).between(reqVo.getStartTime(), reqVo.getEndTime())
-                .and(SysLog::getLogType).in(reqVo.getLogTypeList())
-                .and(SysLog::getAccessUser).likeLeft(reqVo.getAccessUser())
-                .and(SysLog::getUrl).likeLeft(reqVo.getUrl())
-                .and(SysLog::getExceptional).eq(reqVo.getExceptional())
-                .orderBy(SysLog::getCreateTime, false)
+                .where(SYS_LOG.CREATE_TIME.between(reqVo.getStartTime(), reqVo.getEndTime()))
+                .and(SYS_LOG.LOG_TYPE.in(reqVo.getLogTypeList()))
+                .and(SYS_LOG.ACCESS_USER.likeLeft(reqVo.getAccessUser()))
+                .and(SYS_LOG.URL.likeLeft(reqVo.getUrl()))
+                .and(SYS_LOG.EXCEPTIONAL.eq(reqVo.getExceptional()))
+                .orderBy(SYS_LOG.CREATE_TIME, false)
                 .page(Page.of(reqVo.getPageNum(), reqVo.getPageSize()));
         List<SysLogPageRespVo> voList = SysLogConvert.INSTANCE.poToPageRespVo(page.getRecords());
         return new PageResult<>((int) page.getTotalRow(), voList);
