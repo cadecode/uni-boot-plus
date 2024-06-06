@@ -28,7 +28,7 @@ import static com.github.cadecode.ubp.admin.bean.po.table.SysUserTableDef.SYS_US
 public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
 
     @Override
-    public List<String> listRoleIdByLoginId(Object loginId) {
+    public List<String> listRolesByLoginId(Object loginId) {
         return QueryChain.of(SysRole.class)
                 .select(SYS_ROLE.ROLE_CODE)
                 .from(SYS_ROLE)
@@ -40,19 +40,22 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
     }
 
     @Override
-    public List<String> listPermissionIdByRoleId(String roleId) {
-        return listPermissionIdByRoleId(List.of(roleId));
+    public List<String> listPermissionsByRole(String roleCode) {
+        return listPermissionsByRole(List.of(roleCode));
     }
 
+    /**
+     * 不包含路由权限
+     */
     @Override
-    public List<String> listPermissionIdByRoleId(List<String> roleIds) {
+    public List<String> listPermissionsByRole(List<String> roleCodes) {
         return QueryChain.of(SysPermission.class)
                 .select(SYS_PERMISSION.PERMISSION_CODE)
                 .from(SYS_PERMISSION)
                 .innerJoin(SYS_ROLE_PERMISSION).on(SYS_ROLE_PERMISSION.PERMISSION_ID.eq(SYS_PERMISSION.ID))
                 .innerJoin(SYS_ROLE).on(SYS_ROLE_PERMISSION.ROLE_ID.eq(SYS_ROLE.ID))
-                .where(SYS_ROLE.ROLE_CODE.in(roleIds))
-                .and(SYS_PERMISSION.PERMISSION_TYPE.eq(PermissionTypeEnum.API))
+                .where(SYS_ROLE.ROLE_CODE.in(roleCodes))
+                .and(SYS_PERMISSION.PERMISSION_TYPE.ne(PermissionTypeEnum.ROUTE))
                 .and(SYS_PERMISSION.STATUS.eq(true))
                 .listAs(String.class);
     }

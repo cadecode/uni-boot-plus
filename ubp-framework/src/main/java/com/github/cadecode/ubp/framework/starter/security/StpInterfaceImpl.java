@@ -34,7 +34,7 @@ public class StpInterfaceImpl implements StpInterface {
         List<String> roleList = getRoleList(loginId, loginType);
         for (String roleId : roleList) {
             SaSession roleCustomSession = SaSessionCustomUtil.getSessionById("role-" + roleId);
-            List<String> list = roleCustomSession.get(PERMISSION_LIST_KEY, () -> rolePermissionService.listPermissionIdByRoleId(roleId));
+            List<String> list = roleCustomSession.get(PERMISSION_LIST_KEY, () -> rolePermissionService.listPermissionsByRole(roleId));
             permissionList.addAll(list);
         }
         return permissionList;
@@ -46,7 +46,7 @@ public class StpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         SaSession accountSession = StpUtil.getSessionByLoginId(loginId);
-        return accountSession.get(ROLE_LIST_KEY, () -> rolePermissionService.listRoleIdByLoginId(loginId));
+        return accountSession.get(ROLE_LIST_KEY, () -> rolePermissionService.listRolesByLoginId(loginId));
     }
 
 }

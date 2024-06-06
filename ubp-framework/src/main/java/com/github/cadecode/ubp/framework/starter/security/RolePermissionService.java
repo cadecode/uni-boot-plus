@@ -11,23 +11,23 @@ import java.util.List;
 public interface RolePermissionService {
 
     /**
-     * 根据用户 ID 查询角色列表
-     * @param loginId 用户 ID
-     * @return 角色 ID 列表
+     * 根据用户登录 ID （用户名）查询角色列表
+     * @param loginId 用户登录 ID
+     * @return 角色代码列表
      */
-    List<String> listRoleIdByLoginId(Object loginId);
+    List<String> listRolesByLoginId(Object loginId);
 
     /**
-     * 根据角色 ID 查询权限列表
-     * @param roleId 角色 ID
-     * @return 权限 ID 列表
+     * 根据角色代码查询权限列表
+     * @param roleCode 角色代码
+     * @return 权限代码列表
      */
-    List<String> listPermissionIdByRoleId(String roleId);
+    List<String> listPermissionsByRole(String roleCode);
 
     /**
-     * 根据角色 ID 列表查询权限列表
-     * @param roleIds 角色 ID 列表
-     * @return 权限 ID 列表
+     * 根据角色代码列表查询权限列表
+     * @param roleCodes 角色代码
+     * @return 权限代码列表
      */
-    List<String> listPermissionIdByRoleId(List<String> roleIds);
+    List<String> listPermissionsByRole(List<String> roleCodes);
 }
