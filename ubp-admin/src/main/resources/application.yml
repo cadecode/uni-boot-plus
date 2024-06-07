@@ -86,7 +86,7 @@ knife4j:
 # sa-token
 sa-token:
   # token header/cookie key
-  token-name: token
+  token-name: ubp-token
   # token 有效期（秒）
   timeout: 2592000
   # token 最低活跃频率（秒）
