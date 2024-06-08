@@ -5,11 +5,18 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.net.NetUtil;
+import com.github.cadecode.ubp.admin.bean.data.SysPermissionRouteQueryDo;
 import com.github.cadecode.ubp.admin.bean.po.SysUser;
+import com.github.cadecode.ubp.admin.bean.vo.SysPermissionRouteVo.SysPermissionRouteRespVo;
 import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginReqVo;
 import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginRespVo;
+import com.github.cadecode.ubp.admin.convert.SysPermissionConvert;
 import com.github.cadecode.ubp.admin.convert.SysUserConvert;
+import com.github.cadecode.ubp.admin.enums.PermissionTypeEnum;
+import com.github.cadecode.ubp.admin.enums.RouteTypeEnum;
+import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
 import com.github.cadecode.ubp.admin.service.SysUserService;
+import com.github.cadecode.ubp.common.util.TreeUtil;
 import com.github.cadecode.ubp.framework.enums.AuthErrorEnum;
 import com.github.cadecode.ubp.starter.security.encrypt.PasswordEncryptor;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
@@ -22,6 +29,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,6 +51,8 @@ public class AuthController {
     private final PasswordEncryptor passwordEncryptor;
 
     private final SysUserService sysUserService;
+
+    private final SysRolePermissionService sysRolePermissionService;
 
     /**
      * 用户登录
@@ -124,8 +134,34 @@ public class AuthController {
     @SaCheckLogin
     @GetMapping("get_user_routes")
     @Operation(summary = "获取当前用户路由权限")
-    public Object getUserRoutes() {
-        // TODO 获取当前用户路由权限
-        return null;
+    public List<SysPermissionRouteRespVo> getUserRoutes() {
+        // 根据用户名查询路由权限
+        String username = StpUtil.getLoginIdAsString();
+        List<SysPermissionRouteQueryDo> routeQueryDoList = sysRolePermissionService.listRoutePermissionsByUsername(username);
+        // 转换
+        List<SysPermissionRouteRespVo> routeRespVoList = SysPermissionConvert.INSTANCE.routeQueryDoToRouteRespVo(routeQueryDoList);
+        // 树形化
+        return TreeUtil.listToTree(routeRespVoList, null, SysPermissionRouteRespVo::getId, SysPermissionRouteRespVo::getParentId,
+                (p, c) -> {
+                    List<String> currPermissions = new ArrayList<>();
+                    List<SysPermissionRouteRespVo> children = c.stream()
+                            // 收集当前菜单下的 api 权限
+                            .peek(o -> {
+                                if (o.getPermissionType() == PermissionTypeEnum.API) {
+                                    currPermissions.add(o.getPermissionCode());
+                                }
+                            })
+                            // 对外链特殊处理
+                            .peek(o -> {
+                                if (o.getRouteType() == RouteTypeEnum.EXTERNAL) {
+                                    o.setName(o.getMeta().getFrameSrc());
+                                }
+                            })
+                            // 过滤其他权限类型
+                            .filter(o -> o.getPermissionType() == PermissionTypeEnum.ROUTE)
+                            .toList();
+                    p.getMeta().setAuths(currPermissions);
+                    p.getChildren().addAll(children);
+                });
     }
 }

@@ -1,8 +1,10 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
+import com.github.cadecode.ubp.admin.bean.data.SysPermissionRouteQueryDo;
 import com.github.cadecode.ubp.admin.bean.po.SysPermission;
 import com.github.cadecode.ubp.admin.bean.po.SysRole;
 import com.github.cadecode.ubp.admin.bean.po.SysRolePermission;
+import com.github.cadecode.ubp.admin.consts.AdminKeyPrefixConst;
 import com.github.cadecode.ubp.admin.enums.PermissionTypeEnum;
 import com.github.cadecode.ubp.admin.mapper.SysRolePermissionMapper;
 import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
@@ -28,7 +30,7 @@ import static com.github.cadecode.ubp.admin.bean.po.table.SysUserTableDef.SYS_US
 @Service
 public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
 
-    @Cacheable(cacheNames = "sys-role-permission:user-roles", key = "#loginId")
+    @Cacheable(cacheNames = AdminKeyPrefixConst.USER_ROLES, key = "#loginId")
     @Override
     public List<String> listRolesByLoginId(Object loginId) {
         return QueryChain.of(SysRole.class)
@@ -41,14 +43,15 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
                 .listAs(String.class);
     }
 
-    @Cacheable(cacheNames = "sys-role-permission:role-permissions", key = "#roleCode")
+    @Cacheable(cacheNames = AdminKeyPrefixConst.ROLE_PERMISSIONS, key = "#roleCode")
     @Override
     public List<String> listPermissionsByRole(String roleCode) {
         return listPermissionsByRole(List.of(roleCode));
     }
 
     /**
-     * 不包含路由权限
+     * 查询 API 权限
+     * <p>不包含路由权限
      */
     @Override
     public List<String> listPermissionsByRole(List<String> roleCodes) {
@@ -58,8 +61,29 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
                 .innerJoin(SYS_ROLE_PERMISSION).on(SYS_ROLE_PERMISSION.PERMISSION_ID.eq(SYS_PERMISSION.ID))
                 .innerJoin(SYS_ROLE).on(SYS_ROLE_PERMISSION.ROLE_ID.eq(SYS_ROLE.ID))
                 .where(SYS_ROLE.ROLE_CODE.in(roleCodes))
-                .and(SYS_PERMISSION.PERMISSION_TYPE.ne(PermissionTypeEnum.ROUTE))
                 .and(SYS_PERMISSION.STATUS.eq(true))
+                .and(SYS_PERMISSION.PERMISSION_TYPE.eq(PermissionTypeEnum.API))
                 .listAs(String.class);
+    }
+
+    /**
+     * 查询路由权限
+     * <p>包含 API 权限，需要返回给前端路由信息
+     */
+    @Cacheable(cacheNames = AdminKeyPrefixConst.USER_ROUTES, key = "#username")
+    @Override
+    public List<SysPermissionRouteQueryDo> listRoutePermissionsByUsername(String username) {
+        return QueryChain.of(SysPermission.class)
+                .select(SYS_PERMISSION.ALL_COLUMNS, SYS_ROLE.ROLE_CODE.as("roles"))
+                .from(SYS_PERMISSION)
+                .innerJoin(SYS_ROLE_PERMISSION).on(SYS_ROLE_PERMISSION.PERMISSION_ID.eq(SYS_PERMISSION.ID))
+                .innerJoin(SYS_ROLE).on(SYS_ROLE_PERMISSION.ROLE_ID.eq(SYS_ROLE.ID))
+                .innerJoin(SYS_ROLE_USER).on(SYS_ROLE_USER.ROLE_ID.eq(SYS_ROLE.ID))
+                .innerJoin(SYS_USER).on(SYS_ROLE_USER.USER_ID.eq(SYS_USER.ID))
+                .where(SYS_USER.USERNAME.eq(username))
+                .and(SYS_ROLE.STATUS.eq(true))
+                .and(SYS_PERMISSION.STATUS.eq(true))
+                .and(SYS_PERMISSION.PERMISSION_TYPE.in(PermissionTypeEnum.ROUTE, PermissionTypeEnum.API))
+                .listAs(SysPermissionRouteQueryDo.class);
     }
 }
