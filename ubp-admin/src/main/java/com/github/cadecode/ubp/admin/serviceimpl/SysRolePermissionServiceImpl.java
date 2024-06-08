@@ -3,6 +3,7 @@ package com.github.cadecode.ubp.admin.serviceimpl;
 import com.github.cadecode.ubp.admin.bean.po.SysPermission;
 import com.github.cadecode.ubp.admin.bean.po.SysRole;
 import com.github.cadecode.ubp.admin.bean.po.SysRolePermission;
+import com.github.cadecode.ubp.admin.consts.AdminKeyPrefixConst;
 import com.github.cadecode.ubp.admin.mapper.SysRolePermissionMapper;
 import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
 import com.mybatisflex.core.query.QueryChain;
@@ -27,7 +28,7 @@ import static com.github.cadecode.ubp.admin.bean.po.table.SysUserTableDef.SYS_US
 @Service
 public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionMapper, SysRolePermission> implements SysRolePermissionService {
 
-    @Cacheable(cacheNames = "sys-role-permission:user-roles", key = "#loginId")
+    @Cacheable(cacheNames = AdminKeyPrefixConst.USER_ROLES, key = "#loginId")
     @Override
     public List<String> listRoleIdByLoginId(Object loginId) {
         return QueryChain.of(SysRole.class)
@@ -39,7 +40,7 @@ public class SysRolePermissionServiceImpl extends ServiceImpl<SysRolePermissionM
                 .listAs(String.class);
     }
 
-    @Cacheable(cacheNames = "sys-role-permission:role-permissions", key = "#roleId")
+    @Cacheable(cacheNames = AdminKeyPrefixConst.ROLE_PERMISSIONS, key = "#roleId")
     @Override
     public List<String> listPermissionIdByRoleId(String roleId) {
         return listPermissionIdByRoleId(List.of(roleId));
