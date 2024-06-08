@@ -10,15 +10,11 @@ import com.github.cadecode.ubp.admin.bean.po.SysUser;
 import com.github.cadecode.ubp.admin.bean.vo.SysPermissionRouteVo.SysPermissionRouteRespVo;
 import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginReqVo;
 import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginRespVo;
-import com.github.cadecode.ubp.admin.convert.SysPermissionConvert;
 import com.github.cadecode.ubp.admin.convert.SysUserConvert;
-import com.github.cadecode.ubp.admin.enums.PermissionTypeEnum;
-import com.github.cadecode.ubp.admin.enums.RouteTypeEnum;
+import com.github.cadecode.ubp.admin.service.SysPermissionService;
 import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
 import com.github.cadecode.ubp.admin.service.SysUserService;
-import com.github.cadecode.ubp.common.util.TreeUtil;
 import com.github.cadecode.ubp.framework.enums.AuthErrorEnum;
-import com.github.cadecode.ubp.starter.security.encrypt.PasswordEncryptor;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
 import com.github.cadecode.ubp.starter.web.model.ApiResult;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +25,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,9 +43,9 @@ import java.util.Objects;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final PasswordEncryptor passwordEncryptor;
-
     private final SysUserService sysUserService;
+
+    private final SysPermissionService sysPermissionService;
 
     private final SysRolePermissionService sysRolePermissionService;
 
@@ -63,40 +58,28 @@ public class AuthController {
     @PostMapping("login")
     @Operation(summary = "用户登录")
     public ApiResult<SysUserLoginRespVo> login(@RequestBody @Valid SysUserLoginReqVo reqVo) {
-        // 查询数据库
-        SysUser sysUser = sysUserService.queryChain().eq(SysUser::getUsername, reqVo.getUsername()).one();
-        if (Objects.isNull(sysUser)) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("用户不存在");
+        // 根据用户名查询
+        SysUser sysUser = sysUserService.getUserByUsername(reqVo.getUsername());
+        // check
+        ApiResult<SysUserLoginRespVo> checkResult = sysUserService.checkLoginUser(reqVo, sysUser);
+        if (Objects.nonNull(checkResult)) {
+            return checkResult;
         }
-        // 判断是否启用账户
-        if (Objects.equals(sysUser.getStatus(), false)) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("账号状态关闭");
-        }
-        // 校验密码
-        if (!passwordEncryptor.validate(sysUser.getPassword(), null, reqVo.getPassword())) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("密码错误");
-        }
-        // 登录
+        // 登录并获取 token
         StpUtil.login(reqVo.getUsername(), reqVo.getRememberMe());
-
-        // 设置登录时间 IP 信息
-        sysUser.setLoginIp(NetUtil.getLocalhost().getHostAddress());
-        sysUser.setLoginDate(LocalDateTime.now());
-
-        SysUserLoginRespVo sysUserLoginRespVo = SysUserConvert.INSTANCE.poToLoginRespVo(sysUser);
-
-        // 获取角色权限
-        List<String> roles = StpUtil.getRoleList(reqVo.getUsername());
-        List<String> permissions = StpUtil.getPermissionList(reqVo.getUsername());
-        sysUserLoginRespVo.setRoles(roles);
-        sysUserLoginRespVo.setPermissions(permissions);
-
-        // 获取 token 相关信息
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
-        sysUserLoginRespVo.setTokenInfo(tokenInfo);
 
         // 异步更新用户信息
+        sysUser.setLoginIp(NetUtil.getLocalhost().getHostAddress());
+        sysUser.setLoginDate(LocalDateTime.now());
         sysUserService.updateUserLoginInfoAsync(sysUser);
+
+        SysUserLoginRespVo sysUserLoginRespVo = SysUserConvert.INSTANCE.poToLoginRespVo(sysUser);
+        // 填充角色、权限
+        sysUserLoginRespVo.setRoles(StpUtil.getRoleList(reqVo.getUsername()));
+        sysUserLoginRespVo.setPermissions(StpUtil.getPermissionList(reqVo.getUsername()));
+        // 填充 token 相关信息
+        sysUserLoginRespVo.setTokenInfo(tokenInfo);
         return ApiResult.ok(sysUserLoginRespVo);
     }
 
@@ -138,30 +121,6 @@ public class AuthController {
         // 根据用户名查询路由权限
         String username = StpUtil.getLoginIdAsString();
         List<SysPermissionRouteQueryDo> routeQueryDoList = sysRolePermissionService.listRoutePermissionsByUsername(username);
-        // 转换
-        List<SysPermissionRouteRespVo> routeRespVoList = SysPermissionConvert.INSTANCE.routeQueryDoToRouteRespVo(routeQueryDoList);
-        // 树形化
-        return TreeUtil.listToTree(routeRespVoList, null, SysPermissionRouteRespVo::getId, SysPermissionRouteRespVo::getParentId,
-                (p, c) -> {
-                    List<String> currPermissions = new ArrayList<>();
-                    List<SysPermissionRouteRespVo> children = c.stream()
-                            // 收集当前菜单下的 api 权限
-                            .peek(o -> {
-                                if (o.getPermissionType() == PermissionTypeEnum.API) {
-                                    currPermissions.add(o.getPermissionCode());
-                                }
-                            })
-                            // 对外链特殊处理
-                            .peek(o -> {
-                                if (o.getRouteType() == RouteTypeEnum.EXTERNAL) {
-                                    o.setName(o.getMeta().getFrameSrc());
-                                }
-                            })
-                            // 过滤其他权限类型
-                            .filter(o -> o.getPermissionType() == PermissionTypeEnum.ROUTE)
-                            .toList();
-                    p.getMeta().setAuths(currPermissions);
-                    p.getChildren().addAll(children);
-                });
+        return sysPermissionService.convertPermissionsToRouteTree(routeQueryDoList);
     }
 }

@@ -1,7 +1,11 @@
 package com.github.cadecode.ubp.admin.service;
 
+import com.github.cadecode.ubp.admin.bean.data.SysPermissionRouteQueryDo;
 import com.github.cadecode.ubp.admin.bean.po.SysPermission;
+import com.github.cadecode.ubp.admin.bean.vo.SysPermissionRouteVo.SysPermissionRouteRespVo;
 import com.mybatisflex.core.service.IService;
+
+import java.util.List;
 
 /**
  * 系统权限 服务层
@@ -11,4 +15,5 @@ import com.mybatisflex.core.service.IService;
  */
 public interface SysPermissionService extends IService<SysPermission> {
 
+    List<SysPermissionRouteRespVo> convertPermissionsToRouteTree(List<SysPermissionRouteQueryDo> queryDoList);
 }
