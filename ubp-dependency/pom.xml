@@ -38,6 +38,7 @@
         <swagger.version>2.2.19</swagger.version>
         <knife4j.version>4.4.0</knife4j.version>
         <spring-plugin.version>2.0.0.RELEASE</spring-plugin.version>
+        <jasypt.version>3.0.5</jasypt.version>
     </properties>
 
     <dependencies>
@@ -163,6 +164,12 @@
                 <groupId>org.springframework.plugin</groupId>
                 <artifactId>spring-plugin-core</artifactId>
                 <version>${spring-plugin.version}</version>
+            </dependency>
+            <!--jasypt-->
+            <dependency>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-spring-boot-starter</artifactId>
+                <version>${jasypt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
