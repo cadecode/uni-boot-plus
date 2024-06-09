@@ -27,6 +27,7 @@
         <!--自定义配置-->
         <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
         <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
+        <jasypt-maven-plugin.version>3.0.5</jasypt-maven-plugin.version>
         <ubp.version>${project.version}</ubp.version>
     </properties>
 
@@ -170,6 +171,13 @@
                     </execution>
                 </executions>
             </plugin>
+            <!--jasypt 配置加密插件-->
+            <!--mvn jasypt:encrypt -D'jasypt.plugin.path'="file:ubp-admin/src/main/resources/application.yaml" -D'jasypt.encryptor.password'="the password"-->
+            <plugin>
+                <groupId>com.github.ulisesbocchio</groupId>
+                <artifactId>jasypt-maven-plugin</artifactId>
+                <version>${jasypt-maven-plugin.version}</version>
+            </plugin>
         </plugins>
     </build>
 
@@ -187,6 +195,12 @@
             <id>test</id>
             <properties>
                 <profileActive>test</profileActive>
+            </properties>
+        </profile>
+        <profile>
+            <id>staging</id>
+            <properties>
+                <profileActive>staging</profileActive>
             </properties>
         </profile>
         <profile>
