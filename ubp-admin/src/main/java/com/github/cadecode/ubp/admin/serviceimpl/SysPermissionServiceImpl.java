@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 系统权限 服务层实现
@@ -49,7 +50,14 @@ public class SysPermissionServiceImpl extends ServiceImpl<SysPermissionMapper, S
                             .filter(o -> o.getPermissionType() == PermissionTypeEnum.ROUTE)
                             .toList();
                     p.getMeta().setAuths(currPermissions);
-                    p.getChildren().addAll(children);
+                    if (children.isEmpty()) {
+                        return;
+                    }
+                    if (Objects.isNull(p.getChildren())) {
+                        p.setChildren(children);
+                    } else {
+                        p.getChildren().addAll(children);
+                    }
                 });
     }
 }

@@ -5,7 +5,6 @@ import com.github.cadecode.ubp.admin.enums.RouteTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +44,7 @@ public class SysPermissionRouteVo {
         @Schema(description = "系统权限路由元信息")
         private SysPermissionRouteMeta meta;
 
-        private List<SysPermissionRouteRespVo> children = new ArrayList<>();
+        private List<SysPermissionRouteRespVo> children;
 
     }
 

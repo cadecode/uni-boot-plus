@@ -26,7 +26,7 @@ public interface SysPermissionConvert {
     @Mapping(target = "rank", source = "orderNum")
     SysPermissionRouteMeta routeQueryDoToRouteMeta(SysPermissionRouteQueryDo bo);
 
-    @Mapping(target = "name", source = "permissionName")
+    @Mapping(target = "name", source = "permissionCode")
     @Mapping(target = "meta", source = "bo")
     @Mapping(target = "path", source = "routePath")
     @Mapping(target = "component", source = "componentPath")
