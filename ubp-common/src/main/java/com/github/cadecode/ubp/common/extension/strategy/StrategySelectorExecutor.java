@@ -9,6 +9,7 @@ import org.springframework.plugin.core.PluginRegistry;
 import org.springframework.plugin.core.config.EnablePluginRegistries;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,9 +39,9 @@ public class StrategySelectorExecutor extends AbstractStrategyExecutor {
      */
     @Override
     public <S extends StrategyService> void execute(Class<S> clazz, StrategyContext context, Consumer<S> consumer) {
-        List<S> services = selectServices(clazz, context);
-        if (ObjUtil.isNotEmpty(services)) {
-            consumer.accept(services.get(0));
+        Optional<S> serviceOpt = selectService(clazz, context);
+        if (serviceOpt.isPresent()) {
+            consumer.accept(serviceOpt.get());
             return;
         }
         throw new ExtensionException("Strategy service not found, {}, {}", clazz, context.getStrategyType());
@@ -73,9 +74,9 @@ public class StrategySelectorExecutor extends AbstractStrategyExecutor {
      */
     @Override
     public <R, S extends StrategyService> R submit(Class<S> clazz, StrategyContext context, Function<S, R> function) {
-        List<S> services = selectServices(clazz, context);
-        if (ObjUtil.isNotEmpty(services)) {
-            return function.apply(services.get(0));
+        Optional<S> serviceOpt = selectService(clazz, context);
+        if (serviceOpt.isPresent()) {
+            return function.apply(serviceOpt.get());
         }
         throw new ExtensionException("Strategy service not found, {}, {}", clazz, context.getStrategyType());
     }
@@ -101,10 +102,19 @@ public class StrategySelectorExecutor extends AbstractStrategyExecutor {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <S> List<S> selectServices(Class<S> clazz, StrategyContext context) {
-        return (List<S>) pluginRegistry.getPluginsFor(context)
+    public <S> Optional<S> selectService(Class<S> clazz, StrategyContext context) {
+        return (Optional<S>) pluginRegistry.getPlugins()
                 .stream()
-                .filter(o -> clazz.isAssignableFrom(o.getClass()))
+                .filter(o -> clazz.isAssignableFrom(o.getClass()) && o.supports(context))
+                .findFirst();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public <S> List<S> selectServices(Class<S> clazz, StrategyContext context) {
+        return (List<S>) pluginRegistry.getPlugins()
+                .stream()
+                .filter(o -> clazz.isAssignableFrom(o.getClass()) && o.supports(context))
                 .collect(Collectors.toList());
     }
 }
