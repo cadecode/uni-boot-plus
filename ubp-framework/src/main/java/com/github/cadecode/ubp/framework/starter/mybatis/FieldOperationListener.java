@@ -1,7 +1,7 @@
 package com.github.cadecode.ubp.framework.starter.mybatis;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.github.cadecode.ubp.starter.mybatis.listener.BaseInsertUpdateListener;
+import com.github.cadecode.ubp.starter.mybatis.listener.BaseFieldOperationListener;
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import org.springframework.stereotype.Component;
 
@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * 监听器
+ * 字段操作监听器
  *
  * @author Cade Li
  * @since 2024/4/28
  */
 @Component
-public class InsertUpdateListener extends BaseInsertUpdateListener {
+public class FieldOperationListener extends BaseFieldOperationListener {
 
     @Override
     public void onInsert(Object entity) {

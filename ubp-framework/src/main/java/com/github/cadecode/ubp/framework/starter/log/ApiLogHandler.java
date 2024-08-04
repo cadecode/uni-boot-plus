@@ -90,15 +90,15 @@ public class ApiLogHandler extends BaseApiLogHandler {
         if (!apiLogger.enableSave()) {
             return;
         }
-        SysLog po = (SysLog) o;
+        SysLog syslog = (SysLog) o;
         if (!apiLogger.saveParams()) {
-            po.setRequestParams(null);
+            syslog.setRequestParams(null);
         }
         if (!apiLogger.saveResult()) {
-            po.setResult(null);
+            syslog.setResult(null);
         }
         try {
-            sysLogService.save(po);
+            sysLogService.save(syslog);
         } catch (Exception e) {
             log.error("API log [{}]: save fail", apiLogger.type(), e);
         }

@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.starter.mybatis.config;
 
-import com.github.cadecode.ubp.starter.mybatis.listener.BaseInsertUpdateListener;
+import com.github.cadecode.ubp.starter.mybatis.listener.BaseFieldOperationListener;
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.spring.boot.ConfigurationCustomizer;
 import com.mybatisflex.spring.boot.MyBatisFlexCustomizer;
@@ -22,8 +22,8 @@ public class MyBatisFlexConfig {
 
     @ConditionalOnMissingBean
     @Bean
-    public BaseInsertUpdateListener baseInsertUpdateListener() {
-        return new BaseInsertUpdateListener();
+    public BaseFieldOperationListener baseInsertUpdateListener() {
+        return new BaseFieldOperationListener();
     }
 
     /**
@@ -33,10 +33,10 @@ public class MyBatisFlexConfig {
      */
     @ConditionalOnMissingBean
     @Bean
-    public MyBatisFlexCustomizer myBatisFlexCustomizer(BaseInsertUpdateListener baseInsertUpdateListener) {
+    public MyBatisFlexCustomizer myBatisFlexCustomizer(BaseFieldOperationListener baseFieldOperationListener) {
         return globalConfig -> {
-            globalConfig.registerInsertListener(baseInsertUpdateListener, BaseFieldOperable.class);
-            globalConfig.registerUpdateListener(baseInsertUpdateListener, BaseFieldOperable.class);
+            globalConfig.registerInsertListener(baseFieldOperationListener, BaseFieldOperable.class);
+            globalConfig.registerUpdateListener(baseFieldOperationListener, BaseFieldOperable.class);
         };
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Cade Li
  * @since 2024/5/8
  */
-public interface RolePermissionService {
+public interface RolePermissionResolvable {
 
     /**
      * 根据用户 ID 查询角色列表

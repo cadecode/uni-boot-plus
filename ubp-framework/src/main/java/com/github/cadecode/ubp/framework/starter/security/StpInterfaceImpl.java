@@ -17,7 +17,7 @@ import java.util.List;
 @Component
 public class StpInterfaceImpl implements StpInterface {
 
-    private final RolePermissionService rolePermissionService;
+    private final RolePermissionResolvable rolePermissionResolvable;
 
     /**
      * 返回一个账号所拥有的权限码集合
@@ -27,7 +27,7 @@ public class StpInterfaceImpl implements StpInterface {
         List<String> permissionList = new ArrayList<>();
         List<String> roleList = getRoleList(loginId, loginType);
         for (String role : roleList) {
-            List<String> permissions = rolePermissionService.listPermissionIdByRoleId(role);
+            List<String> permissions = rolePermissionResolvable.listPermissionIdByRoleId(role);
             permissionList.addAll(permissions);
         }
         return permissionList;
@@ -38,7 +38,7 @@ public class StpInterfaceImpl implements StpInterface {
      */
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
-        return rolePermissionService.listRoleIdByLoginId(loginId);
+        return rolePermissionResolvable.listRoleIdByLoginId(loginId);
     }
 
 }
