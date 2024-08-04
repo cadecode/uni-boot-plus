@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
-import com.github.cadecode.ubp.admin.bean.po.SysPermission;
+import com.github.cadecode.ubp.admin.bean.entity.SysPermission;
 import com.github.cadecode.ubp.admin.mapper.SysPermissionMapper;
 import com.github.cadecode.ubp.admin.service.SysPermissionService;
 import com.mybatisflex.spring.service.impl.ServiceImpl;

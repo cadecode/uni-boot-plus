@@ -1,8 +1,8 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
-import com.github.cadecode.ubp.admin.bean.po.SysPermission;
-import com.github.cadecode.ubp.admin.bean.po.SysRole;
-import com.github.cadecode.ubp.admin.bean.po.SysRolePermission;
+import com.github.cadecode.ubp.admin.bean.entity.SysPermission;
+import com.github.cadecode.ubp.admin.bean.entity.SysRole;
+import com.github.cadecode.ubp.admin.bean.entity.SysRolePermission;
 import com.github.cadecode.ubp.admin.consts.AdminKeyPrefixConst;
 import com.github.cadecode.ubp.admin.mapper.SysRolePermissionMapper;
 import com.github.cadecode.ubp.admin.service.SysRolePermissionService;
@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.github.cadecode.ubp.admin.bean.po.table.SysPermissionTableDef.SYS_PERMISSION;
-import static com.github.cadecode.ubp.admin.bean.po.table.SysRolePermissionTableDef.SYS_ROLE_PERMISSION;
-import static com.github.cadecode.ubp.admin.bean.po.table.SysRoleTableDef.SYS_ROLE;
-import static com.github.cadecode.ubp.admin.bean.po.table.SysRoleUserTableDef.SYS_ROLE_USER;
-import static com.github.cadecode.ubp.admin.bean.po.table.SysUserTableDef.SYS_USER;
+import static com.github.cadecode.ubp.admin.bean.entity.table.SysPermissionTableDef.SYS_PERMISSION;
+import static com.github.cadecode.ubp.admin.bean.entity.table.SysRolePermissionTableDef.SYS_ROLE_PERMISSION;
+import static com.github.cadecode.ubp.admin.bean.entity.table.SysRoleTableDef.SYS_ROLE;
+import static com.github.cadecode.ubp.admin.bean.entity.table.SysRoleUserTableDef.SYS_ROLE_USER;
+import static com.github.cadecode.ubp.admin.bean.entity.table.SysUserTableDef.SYS_USER;
 
 /**
  * 角色权限关系 服务层实现

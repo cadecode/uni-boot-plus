@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.mapper;
 
-import com.github.cadecode.ubp.admin.bean.po.SysRole;
+import com.github.cadecode.ubp.admin.bean.entity.SysRole;
 import com.mybatisflex.core.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

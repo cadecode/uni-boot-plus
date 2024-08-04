@@ -1,4 +1,4 @@
-package com.github.cadecode.ubp.admin.bean.po;
+package com.github.cadecode.ubp.admin.bean.entity;
 
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.Table;
@@ -12,7 +12,7 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 角色用户关系 实体类
+ * 角色权限关系 实体类
  *
  * @author Cade Li
  * @since 2024/5/08
@@ -21,9 +21,9 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "角色用户关系")
-@Table("sys_role_user")
-public class SysRoleUser implements Serializable {
+@Schema(description = "角色权限关系")
+@Table("sys_role_permission")
+public class SysRolePermission implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class SysRoleUser implements Serializable {
     private String roleId;
 
     @Id
-    @Schema(description = "用户 ID")
-    private String userId;
+    @Schema(description = "权限 ID")
+    private String permissionId;
 
 }

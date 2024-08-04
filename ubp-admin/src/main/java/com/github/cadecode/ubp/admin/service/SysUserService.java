@@ -1,8 +1,8 @@
 package com.github.cadecode.ubp.admin.service;
 
-import com.github.cadecode.ubp.admin.bean.po.SysUser;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginReqVo;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginRespVo;
+import com.github.cadecode.ubp.admin.bean.dto.SysUserLoginDto;
+import com.github.cadecode.ubp.admin.bean.entity.SysUser;
+import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo;
 import com.github.cadecode.ubp.starter.web.model.ApiResult;
 import com.mybatisflex.core.service.IService;
 
@@ -16,7 +16,7 @@ public interface SysUserService extends IService<SysUser> {
 
     SysUser getUserByUserId(String userId);
 
-    ApiResult<SysUserLoginRespVo> checkLoginUser(SysUserLoginReqVo reqVo, SysUser sysUser);
+    ApiResult<SysUserLoginVo> checkLoginUser(SysUserLoginDto reqVo, SysUser sysUser);
 
     void updateUserLoginInfo(SysUser sysUser);
 

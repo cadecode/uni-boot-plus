@@ -19,7 +19,7 @@ import java.util.List;
  * 系统权限 控制层
  *
  * @author Cade Li
- * @since 2024/5/08
+ * @since 2024/8/04
  */
 @ApiFormat
 @RequiredArgsConstructor
@@ -34,13 +34,13 @@ public class SysPermissionController {
     /**
      * 保存系统权限
      *
-     * @param reqVo 系统权限 VO
+     * @param saveDto 系统权限 DTO
      * @return 是否添加成功
      */
     @PostMapping("save")
     @Operation(summary = "保存系统权限")
-    public Object save(@RequestBody @Valid @Parameter(description = "系统权限") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public Object save(@RequestBody @Valid @Parameter(description = "系统权限") Object saveDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
@@ -70,13 +70,13 @@ public class SysPermissionController {
     /**
      * 根据主键更新系统权限
      *
-     * @param reqVo 系统权限 VO
+     * @param updateDto 系统权限 DTO
      * @return 是否更新成功
      */
     @PutMapping("update")
     @Operation(summary = "根据主键更新系统权限")
-    public boolean update(@RequestBody @Valid @Parameter(description = "系统权限主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
+    public boolean update(@RequestBody @Valid @Parameter(description = "系统权限主键") Object updateDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO 类表示请求");
     }
 
     /**
@@ -106,25 +106,25 @@ public class SysPermissionController {
     /**
      * 根据条件查询系统权限
      *
-     * @param reqVo 系统权限 VO
+     * @param listDto 系统权限 DTO
      * @return 系统权限详情
      */
     @PostMapping("list")
     @Operation(summary = "根据条件查询系统权限")
-    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统权限主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统权限主键") Object listDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
      * 分页查询系统权限
      *
-     * @param reqVo 系统权限 VO
+     * @param pageDto 系统权限 DTO
      * @return 分页结果
      */
     @PostMapping("page")
     @Operation(summary = "分页查询系统权限")
-    public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object pageDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
 }

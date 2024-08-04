@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
-import com.github.cadecode.ubp.admin.bean.po.SysUserGroup;
+import com.github.cadecode.ubp.admin.bean.entity.SysUserGroup;
 import com.github.cadecode.ubp.admin.mapper.SysUserGroupMapper;
 import com.github.cadecode.ubp.admin.service.SysUserGroupService;
 import com.mybatisflex.spring.service.impl.ServiceImpl;

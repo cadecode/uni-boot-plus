@@ -1,8 +1,8 @@
 package com.github.cadecode.ubp.framework.controller;
 
-import com.github.cadecode.ubp.framework.bean.po.SysLog;
-import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageReqVo;
-import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo.SysLogPageRespVo;
+import com.github.cadecode.ubp.framework.bean.dto.SysLogPageDto;
+import com.github.cadecode.ubp.framework.bean.entity.SysLog;
+import com.github.cadecode.ubp.framework.bean.vo.SysLogPageVo;
 import com.github.cadecode.ubp.framework.convert.SysLogConvert;
 import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.github.cadecode.ubp.starter.web.annotation.ApiFormat;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 
-import static com.github.cadecode.ubp.framework.bean.po.table.SysLogTableDef.SYS_LOG;
+import static com.github.cadecode.ubp.framework.bean.entity.table.SysLogTableDef.SYS_LOG;
 
 /**
  * 系统日志 控制层
@@ -41,13 +41,13 @@ public class SysLogController {
     /**
      * 保存系统日志
      *
-     * @param reqVo 系统日志 VO
+     * @param saveDto 系统日志 DTO
      * @return 是否添加成功
      */
     @PostMapping("save")
     @Operation(summary = "保存系统日志")
-    public Object save(@RequestBody @Valid @Parameter(description = "系统日志") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public Object save(@RequestBody @Valid @Parameter(description = "系统日志") Object saveDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
@@ -77,13 +77,13 @@ public class SysLogController {
     /**
      * 根据主键更新系统日志
      *
-     * @param reqVo 系统日志 VO
+     * @param updateDto 系统日志 DTO
      * @return 是否更新成功
      */
     @PutMapping("update")
     @Operation(summary = "根据主键更新系统日志")
-    public boolean update(@RequestBody @Valid @Parameter(description = "系统日志主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
+    public boolean update(@RequestBody @Valid @Parameter(description = "系统日志主键") Object updateDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO 类表示请求");
     }
 
     /**
@@ -113,33 +113,33 @@ public class SysLogController {
     /**
      * 根据条件查询系统日志
      *
-     * @param reqVo 系统日志 VO
+     * @param listDto 系统日志 DTO
      * @return 系统日志详情
      */
     @PostMapping("list")
     @Operation(summary = "根据条件查询系统日志")
-    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统日志主键") Object listDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
      * 分页查询系统日志
      *
-     * @param reqVo 系统日志 VO
+     * @param pageDto 系统日志 DTO
      * @return 分页结果
      */
     @PostMapping("page")
     @Operation(summary = "分页查询系统日志")
-    public PageResult<SysLogPageRespVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageReqVo reqVo) {
+    public PageResult<SysLogPageVo> page(@RequestBody @Valid @Parameter(description = "分页信息") SysLogPageDto pageDto) {
         Page<SysLog> page = sysLogService.queryChain()
-                .where(SYS_LOG.CREATE_TIME.between(reqVo.getStartTime(), reqVo.getEndTime()))
-                .and(SYS_LOG.LOG_TYPE.in(reqVo.getLogTypeList()))
-                .and(SYS_LOG.ACCESS_USER.likeLeft(reqVo.getAccessUser()))
-                .and(SYS_LOG.URL.likeLeft(reqVo.getUrl()))
-                .and(SYS_LOG.EXCEPTIONAL.eq(reqVo.getExceptional()))
+                .where(SYS_LOG.CREATE_TIME.between(pageDto.getStartTime(), pageDto.getEndTime()))
+                .and(SYS_LOG.LOG_TYPE.in(pageDto.getLogTypeList()))
+                .and(SYS_LOG.ACCESS_USER.likeLeft(pageDto.getAccessUser()))
+                .and(SYS_LOG.URL.likeLeft(pageDto.getUrl()))
+                .and(SYS_LOG.EXCEPTIONAL.eq(pageDto.getExceptional()))
                 .orderBy(SYS_LOG.CREATE_TIME, false)
-                .page(Page.of(reqVo.getPageNum(), reqVo.getPageSize()));
-        List<SysLogPageRespVo> voList = SysLogConvert.INSTANCE.poToPageRespVo(page.getRecords());
+                .page(Page.of(pageDto.getPageNum(), pageDto.getPageSize()));
+        List<SysLogPageVo> voList = SysLogConvert.INSTANCE.entityToPageVo(page.getRecords());
         return new PageResult<>((int) page.getTotalRow(), voList);
     }
 

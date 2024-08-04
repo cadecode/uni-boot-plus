@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.framework.serviceimpl;
 
-import com.github.cadecode.ubp.framework.bean.po.SysLog;
+import com.github.cadecode.ubp.framework.bean.entity.SysLog;
 import com.github.cadecode.ubp.framework.mapper.SysLogMapper;
 import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.mybatisflex.spring.service.impl.ServiceImpl;

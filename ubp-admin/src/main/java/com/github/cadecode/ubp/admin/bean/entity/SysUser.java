@@ -1,4 +1,4 @@
-package com.github.cadecode.ubp.admin.bean.po;
+package com.github.cadecode.ubp.admin.bean.entity;
 
 import com.github.cadecode.ubp.starter.mybatis.model.BaseFieldOperable;
 import com.mybatisflex.annotation.Id;

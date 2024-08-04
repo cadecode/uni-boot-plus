@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.service;
 
-import com.github.cadecode.ubp.admin.bean.po.SysUserGroup;
+import com.github.cadecode.ubp.admin.bean.entity.SysUserGroup;
 import com.mybatisflex.core.service.IService;
 
 /**

@@ -8,7 +8,7 @@ import cn.hutool.extra.servlet.JakartaServletUtil;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.github.cadecode.ubp.common.util.JacksonUtil;
-import com.github.cadecode.ubp.framework.bean.po.SysLog;
+import com.github.cadecode.ubp.framework.bean.entity.SysLog;
 import com.github.cadecode.ubp.framework.consts.HttpConst;
 import com.github.cadecode.ubp.framework.service.SysLogService;
 import com.github.cadecode.ubp.starter.log.annotation.ApiLogger;

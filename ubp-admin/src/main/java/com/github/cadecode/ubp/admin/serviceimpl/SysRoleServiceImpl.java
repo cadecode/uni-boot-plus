@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
-import com.github.cadecode.ubp.admin.bean.po.SysRole;
+import com.github.cadecode.ubp.admin.bean.entity.SysRole;
 import com.github.cadecode.ubp.admin.mapper.SysRoleMapper;
 import com.github.cadecode.ubp.admin.service.SysRoleService;
 import com.mybatisflex.spring.service.impl.ServiceImpl;

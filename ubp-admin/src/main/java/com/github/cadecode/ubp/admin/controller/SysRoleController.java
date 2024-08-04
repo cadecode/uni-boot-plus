@@ -19,7 +19,7 @@ import java.util.List;
  * 系统角色 控制层
  *
  * @author Cade Li
- * @since 2024/5/08
+ * @since 2024/8/04
  */
 @ApiFormat
 @RequiredArgsConstructor
@@ -34,13 +34,13 @@ public class SysRoleController {
     /**
      * 保存系统角色
      *
-     * @param reqVo 系统角色 VO
+     * @param saveDto 系统角色 DTO
      * @return 是否添加成功
      */
     @PostMapping("save")
     @Operation(summary = "保存系统角色")
-    public Object save(@RequestBody @Valid @Parameter(description = "系统角色") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public Object save(@RequestBody @Valid @Parameter(description = "系统角色") Object saveDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
@@ -70,13 +70,13 @@ public class SysRoleController {
     /**
      * 根据主键更新系统角色
      *
-     * @param reqVo 系统角色 VO
+     * @param updateDto 系统角色 DTO
      * @return 是否更新成功
      */
     @PutMapping("update")
     @Operation(summary = "根据主键更新系统角色")
-    public boolean update(@RequestBody @Valid @Parameter(description = "系统角色主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
+    public boolean update(@RequestBody @Valid @Parameter(description = "系统角色主键") Object updateDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO 类表示请求");
     }
 
     /**
@@ -106,25 +106,25 @@ public class SysRoleController {
     /**
      * 根据条件查询系统角色
      *
-     * @param reqVo 系统角色 VO
+     * @param listDto 系统角色 DTO
      * @return 系统角色详情
      */
     @PostMapping("list")
     @Operation(summary = "根据条件查询系统角色")
-    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统角色主键") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public List<Object> list(@RequestBody @NotEmpty @Parameter(description = "系统角色主键") Object listDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
      * 分页查询系统角色
      *
-     * @param reqVo 系统角色 VO
+     * @param pageDto 系统角色 DTO
      * @return 分页结果
      */
     @PostMapping("page")
     @Operation(summary = "分页查询系统角色")
-    public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public PageResult<Object> page(@RequestBody @Valid @Parameter(description = "分页信息") Object pageDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
 }

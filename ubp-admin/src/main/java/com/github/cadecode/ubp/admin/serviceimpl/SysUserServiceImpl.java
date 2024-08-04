@@ -1,8 +1,8 @@
 package com.github.cadecode.ubp.admin.serviceimpl;
 
-import com.github.cadecode.ubp.admin.bean.po.SysUser;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginReqVo;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginRespVo;
+import com.github.cadecode.ubp.admin.bean.dto.SysUserLoginDto;
+import com.github.cadecode.ubp.admin.bean.entity.SysUser;
+import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo;
 import com.github.cadecode.ubp.admin.mapper.SysUserMapper;
 import com.github.cadecode.ubp.admin.service.SysUserService;
 import com.github.cadecode.ubp.framework.enums.AuthErrorEnum;
@@ -33,17 +33,17 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     @Override
-    public ApiResult<SysUserLoginRespVo> checkLoginUser(SysUserLoginReqVo reqVo, SysUser sysUser) {
+    public ApiResult<SysUserLoginVo> checkLoginUser(SysUserLoginDto reqVo, SysUser sysUser) {
         if (Objects.isNull(sysUser)) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("用户不存在");
+            return ApiResult.<SysUserLoginVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("用户不存在");
         }
         // 判断是否启用账户
         if (Objects.equals(sysUser.getEnableFlag(), false)) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("账号状态关闭");
+            return ApiResult.<SysUserLoginVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("账号状态关闭");
         }
         // 校验密码
         if (!passwordEncryptor.validate(sysUser.getPassword(), null, reqVo.getPassword())) {
-            return ApiResult.<SysUserLoginRespVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("密码错误");
+            return ApiResult.<SysUserLoginVo>of(AuthErrorEnum.TOKEN_CREATE_ERROR, null).moreInfo("密码错误");
         }
         return null;
     }

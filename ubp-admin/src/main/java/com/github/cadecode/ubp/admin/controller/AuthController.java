@@ -5,9 +5,9 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.net.NetUtil;
-import com.github.cadecode.ubp.admin.bean.po.SysUser;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginReqVo;
-import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo.SysUserLoginRespVo;
+import com.github.cadecode.ubp.admin.bean.dto.SysUserLoginDto;
+import com.github.cadecode.ubp.admin.bean.entity.SysUser;
+import com.github.cadecode.ubp.admin.bean.vo.SysUserLoginVo;
 import com.github.cadecode.ubp.admin.convert.SysUserConvert;
 import com.github.cadecode.ubp.admin.service.SysUserService;
 import com.github.cadecode.ubp.framework.enums.AuthErrorEnum;
@@ -48,16 +48,16 @@ public class AuthController {
     @SaIgnore
     @PostMapping("login")
     @Operation(summary = "用户登录")
-    public ApiResult<SysUserLoginRespVo> login(@RequestBody @Valid SysUserLoginReqVo reqVo) {
+    public ApiResult<SysUserLoginVo> login(@RequestBody @Valid SysUserLoginDto loginDto) {
         // 根据用户名查询
-        SysUser sysUser = sysUserService.getUserByUserId(reqVo.getUserId());
+        SysUser sysUser = sysUserService.getUserByUserId(loginDto.getUserId());
         // check
-        ApiResult<SysUserLoginRespVo> checkResult = sysUserService.checkLoginUser(reqVo, sysUser);
+        ApiResult<SysUserLoginVo> checkResult = sysUserService.checkLoginUser(loginDto, sysUser);
         if (Objects.nonNull(checkResult)) {
             return checkResult;
         }
         // 登录并获取 token
-        StpUtil.login(reqVo.getUserId(), reqVo.getRememberMe());
+        StpUtil.login(loginDto.getUserId(), loginDto.getRememberMe());
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
 
         // 异步更新用户信息
@@ -65,13 +65,13 @@ public class AuthController {
         sysUser.setLoginDate(LocalDateTime.now());
         sysUserService.updateUserLoginInfoAsync(sysUser);
 
-        SysUserLoginRespVo sysUserLoginRespVo = SysUserConvert.INSTANCE.poToLoginRespVo(sysUser);
+        SysUserLoginVo sysUserLoginVo = SysUserConvert.INSTANCE.entityToLoginVo(sysUser);
         // 填充角色、权限
-        sysUserLoginRespVo.setRoles(StpUtil.getRoleList(reqVo.getUserId()));
-        sysUserLoginRespVo.setPermissions(StpUtil.getPermissionList(reqVo.getUserId()));
+        sysUserLoginVo.setRoles(StpUtil.getRoleList(loginDto.getUserId()));
+        sysUserLoginVo.setPermissions(StpUtil.getPermissionList(loginDto.getUserId()));
         // 填充 token 相关信息
-        sysUserLoginRespVo.setTokenInfo(tokenInfo);
-        return ApiResult.ok(sysUserLoginRespVo);
+        sysUserLoginVo.setTokenInfo(tokenInfo);
+        return ApiResult.ok(sysUserLoginVo);
     }
 
     /**

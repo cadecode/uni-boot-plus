@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.service;
 
-import com.github.cadecode.ubp.admin.bean.po.SysRolePermission;
+import com.github.cadecode.ubp.admin.bean.entity.SysRolePermission;
 import com.github.cadecode.ubp.framework.starter.security.RolePermissionResolvable;
 import com.mybatisflex.core.service.IService;
 

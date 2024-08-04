@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.admin.service;
 
-import com.github.cadecode.ubp.admin.bean.po.SysPermission;
+import com.github.cadecode.ubp.admin.bean.entity.SysPermission;
 import com.mybatisflex.core.service.IService;
 
 /**

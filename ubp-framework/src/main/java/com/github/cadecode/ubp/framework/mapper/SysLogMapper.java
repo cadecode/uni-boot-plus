@@ -1,6 +1,6 @@
 package com.github.cadecode.ubp.framework.mapper;
 
-import com.github.cadecode.ubp.framework.bean.po.SysLog;
+import com.github.cadecode.ubp.framework.bean.entity.SysLog;
 import com.mybatisflex.core.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
