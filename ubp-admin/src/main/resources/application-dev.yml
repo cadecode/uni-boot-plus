@@ -27,11 +27,10 @@ mybatis-flex:
       type: com.alibaba.druid.pool.DruidDataSource
       url: ENC(/Ix9IEe/UZk1HBbH+oiW/ojUBm5xfGE6h0sXLf/sfXn7K+2ZPv0ojlGb6Qj04aUiip9rku6LKE7upttW6dloyYu3Ca6LWsvXio7bO5E3ACA=)
       username: ENC(5gjxaEdFuV66TYU5jmAIhWBdbHWO2Sh+AMyDC/VDUXWlnTSA9GywTbvA3wHNuqne)
-      password: ENC(6xPDOnRFk+DmW1xWfjJsgzkjO3gLfHFHFPk3gzjL/AG772ptUeIkt92NfJsHTXXq)
+      password: ENC(vbLr/sHvyEcWH/6K0C3FtDck3WkIJRqpX0a022wJ/Yy4Kg7jTtypbmxgwoyf1htE)
     ds2:
       type: com.alibaba.druid.pool.DruidDataSource
       url: ENC(ro9a2Wd5QHoyfOcBJMPn/2+bRdGNM9YRzsO2epiHcQccVWsDc+h3Q/9TsodY3mHzc1PX7atQMUjcdtwz5OUF3z89j89YYIAr06Z7TyTXcGA=)
       username: ENC(rBfiXjSPgGkzhTCGm+sqgV4979O0ynBgxui//NidW3AAdVAKAS9Oj4IP6XiyaT2i)
-      password: ENC(GIStTC2DCKLIrP1rMfaRg1Qr90xqErjj01kI4ZGhDLmt+AhlmIjWfUvSh3Avs5yg)
-
+      password: ENC(vbLr/sHvyEcWH/6K0C3FtDck3WkIJRqpX0a022wJ/Yy4Kg7jTtypbmxgwoyf1htE)
 
