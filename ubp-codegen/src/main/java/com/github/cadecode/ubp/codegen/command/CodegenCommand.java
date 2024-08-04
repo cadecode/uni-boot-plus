@@ -104,7 +104,7 @@ public class CodegenCommand {
         packageConfig.setBasePackage(basePackage);
         packageConfig.setMapperXmlPath(completedSourceDir + "/src/main/resources/mapper");
         // 按本项目风格定制
-        packageConfig.setEntityPackage(packageConfig.getBasePackage() + ".bean.po");
+        packageConfig.setEntityPackage(packageConfig.getBasePackage() + ".bean.entity");
         packageConfig.setServiceImplPackage(packageConfig.getBasePackage() + ".serviceimpl");
 
         Generator generator = new Generator(DsManageCommand.getDs(), globalConfig);

@@ -68,7 +68,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     /**
      * 保存#(tableComment)
      *
-     * @param reqVo #(tableComment) VO
+     * @param saveDto #(tableComment) DTO
      * @return 是否添加成功
      */
     @PostMapping("save")
@@ -78,8 +78,8 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(summary = "保存#(tableComment)")
     #end
-    public Object save(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)")#end  Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public Object save(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)")#end  Object saveDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
@@ -119,7 +119,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     /**
      * 根据主键更新#(tableComment)
      *
-     * @param reqVo #(tableComment) VO
+     * @param updateDto #(tableComment) DTO
      * @return 是否更新成功
      */
     @PutMapping("update")
@@ -129,8 +129,8 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(summary = "根据主键更新#(tableComment)")
     #end
-    public boolean update(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求");
+    public boolean update(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object updateDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO 类表示请求");
     }
 
     /**
@@ -170,7 +170,7 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     /**
      * 根据条件查询#(tableComment)
      *
-     * @param reqVo #(tableComment) VO
+     * @param listDto #(tableComment) DTO
      * @return #(tableComment)详情
      */
     @PostMapping("list")
@@ -180,14 +180,14 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(summary = "根据条件查询#(tableComment)")
     #end
-    public List<Object> list(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public List<Object> list(@RequestBody @NotEmpty #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("#(tableComment)主键") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "#(tableComment)主键")#end  Object listDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
     /**
      * 分页查询#(tableComment)
      *
-     * @param reqVo #(tableComment) VO
+     * @param pageDto #(tableComment) DTO
      * @return 分页结果
      */
     @PostMapping("page")
@@ -197,8 +197,8 @@ public class #(table.buildControllerClassName()) #if(controllerConfig.superClass
     #if(withSwagger && swaggerVersion.getName() == "DOC")
     @Operation(summary = "分页查询#(tableComment)")
     #end
-    public PageResult<Object> page(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("分页信息") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "分页信息")#end  Object reqVo) {
-        throw new RuntimeException("接口未完成！请使用合适的 VO 类表示请求和响应");
+    public PageResult<Object> page(@RequestBody @Valid #if(withSwagger && swaggerVersion.getName() == "FOX")@ApiParam("分页信息") #end #if(withSwagger && swaggerVersion.getName() == "DOC")@Parameter(description = "分页信息")#end  Object pageDto) {
+        throw new RuntimeException("接口未完成！请使用合适的 DTO/VO 类表示请求和响应");
     }
 
 }
