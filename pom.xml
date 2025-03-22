@@ -2,16 +2,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.cadecode</groupId>
-    <artifactId>ubp-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <parent>
+        <groupId>com.github.cadecode</groupId>
+        <artifactId>ubp-dependency</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>ubp-dependency</relativePath>
+    </parent>
+
     <packaging>pom</packaging>
+    <artifactId>ubp-parent</artifactId>
     <name>uni-boot-plus</name>
     <description>
         UniBootPlus，一个轻量、高效、优雅的 SpringBoot 应用骨架
     </description>
+
     <modules>
-        <module>ubp-dependency</module>
+        <module>ubp-common</module>
+        <module>ubp-codegen</module>
+        <module>ubp-starter</module>
+        <module>ubp-framework</module>
+        <module>ubp-admin</module>
     </modules>
 
     <properties>
@@ -22,69 +32,45 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <!--自定义配置-->
-        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
-        <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
-        <jasypt-maven-plugin.version>3.0.5</jasypt-maven-plugin.version>
         <ubp.version>${project.version}</ubp.version>
     </properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-common</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-framework</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-web</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-log</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-actuator</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-datasource</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-mybatis</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-swagger</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-cache</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cadecode</groupId>
-                <artifactId>ubp-starter-security</artifactId>
-                <version>${ubp.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+    <dependencies>
+        <!--lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!--mapstruct-->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+        </dependency>
+        <!--guava-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <!--vavr-->
+        <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr</artifactId>
+        </dependency>
+        <!--hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-extra</artifactId>
+        </dependency>
+    </dependencies>
 
     <repositories>
         <repository>
@@ -125,7 +111,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
                 <configuration>
                     <propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
                     <delimiters>
@@ -137,7 +122,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <parameters>true</parameters>
                     <source>${maven.compiler.source}</source>
@@ -148,7 +132,6 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>${versions-maven-plugin.version}</version>
                 <configuration>
                     <generateBackupPoms>false</generateBackupPoms>
                 </configuration>
@@ -157,7 +140,6 @@
             <plugin>
                 <groupId>com.rudikershaw.gitbuildhook</groupId>
                 <artifactId>git-build-hook-maven-plugin</artifactId>
-                <version>${git-build-hook-maven-plugin.version}</version>
                 <configuration>
                     <gitConfig>
                         <core.hooksPath>ci/git-hooks</core.hooksPath>
@@ -172,13 +154,39 @@
                 </executions>
             </plugin>
             <!--jasypt 配置加密插件-->
-            <!--mvn jasypt:encrypt -D'jasypt.plugin.path'="file:ubp-admin/src/main/resources/application.yaml" -D'jasypt.encryptor.password'="the password"-->
+            <!--mvn jasypt:encrypt \
+                -D'jasypt.plugin.path'="file:ubp-admin/src/main/resources/application.yaml" \
+                -D'jasypt.encryptor.password'="the password"-->
             <plugin>
                 <groupId>com.github.ulisesbocchio</groupId>
                 <artifactId>jasypt-maven-plugin</artifactId>
-                <version>${jasypt-maven-plugin.version}</version>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                    <configuration>
+                        <includeSystemScope>true</includeSystemScope>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>

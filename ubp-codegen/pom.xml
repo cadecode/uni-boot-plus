@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-dependency</artifactId>
+        <artifactId>ubp-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ubp-dependency/pom.xml</relativePath>
     </parent>
 
     <artifactId>ubp-codegen</artifactId>
@@ -22,6 +21,17 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-mybatis</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        
         <!--mybatis-flex codegen-->
         <dependency>
             <groupId>com.mybatis-flex</groupId>
@@ -66,15 +76,6 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-mybatis</artifactId>
         </dependency>
     </dependencies>
 

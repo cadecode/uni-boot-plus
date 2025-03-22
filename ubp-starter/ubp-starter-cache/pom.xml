@@ -15,6 +15,12 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        
         <!--SpringBoot Cache-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -34,11 +40,6 @@
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
             <artifactId>caffeine</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-common</artifactId>
         </dependency>
     </dependencies>
 

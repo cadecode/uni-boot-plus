@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-dependency</artifactId>
+        <artifactId>ubp-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ubp-dependency/pom.xml</relativePath>
     </parent>
 
     <artifactId>ubp-framework</artifactId>
@@ -16,6 +15,42 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-web</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-log</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-datasource</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-mybatis</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-cache</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-security</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>
@@ -53,35 +88,6 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-datasource</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-mybatis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-cache</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-security</artifactId>
         </dependency>
     </dependencies>
 

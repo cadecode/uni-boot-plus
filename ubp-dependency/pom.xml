@@ -3,28 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-    </parent>
+    <groupId>com.github.cadecode</groupId>
+    <artifactId>ubp-dependency</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <artifactId>ubp-dependency</artifactId>
+    <name>ubp-dependency</name>
     <description>
         依赖集中管理
     </description>
-    <modules>
-        <module>../ubp-common</module>
-        <module>../ubp-starter</module>
-        <module>../ubp-framework</module>
-        <module>../ubp-admin</module>
-        <module>../ubp-codegen</module>
-    </modules>
 
     <properties>
         <spring-boot.version>3.2.5</spring-boot.version>
-        <spring-boot-maven-plugin.version>3.2.5</spring-boot-maven-plugin.version>
         <hutool.vsersion>5.8.12</hutool.vsersion>
         <lombok.version>1.18.32</lombok.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
@@ -39,49 +29,14 @@
         <knife4j.version>4.4.0</knife4j.version>
         <spring-plugin.version>2.0.0.RELEASE</spring-plugin.version>
         <jasypt.version>3.0.5</jasypt.version>
+        <!--插件配置-->
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
+        <git-build-hook-maven-plugin.version>3.5.0</git-build-hook-maven-plugin.version>
+        <jasypt-maven-plugin.version>3.0.5</jasypt-maven-plugin.version>
+        <spring-boot-maven-plugin.version>3.2.5</spring-boot-maven-plugin.version>
     </properties>
-
-    <dependencies>
-        <!--lombok-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <!--mapstruct-->
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct</artifactId>
-            <version>${mapstruct.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${mapstruct.version}</version>
-        </dependency>
-        <!--guava-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.vsersion}</version>
-        </dependency>
-        <!--vavr-->
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>${vavr.vsersion}</version>
-        </dependency>
-        <!--hutool-->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-extra</artifactId>
-        </dependency>
-    </dependencies>
 
     <dependencyManagement>
         <dependencies>
@@ -100,6 +55,36 @@
                 <version>${hutool.vsersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!--lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <!--mapstruct-->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!--guava-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.vsersion}</version>
+            </dependency>
+            <!--vavr-->
+            <dependency>
+                <groupId>io.vavr</groupId>
+                <artifactId>vavr</artifactId>
+                <version>${vavr.vsersion}</version>
             </dependency>
             <!--mica-auto，自动生成 SPI-->
             <dependency>
@@ -178,25 +163,38 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <!--模块版本号管理插件-->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>${versions-maven-plugin.version}</version>
+                </plugin>
+                <!--git hooks 管理插件-->
+                <plugin>
+                    <groupId>com.rudikershaw.gitbuildhook</groupId>
+                    <artifactId>git-build-hook-maven-plugin</artifactId>
+                    <version>${git-build-hook-maven-plugin.version}</version>
+                </plugin>
+                <!--jasypt 配置加密插件-->
+                <!--mvn jasypt:encrypt -D'jasypt.plugin.path'="file:ubp-admin/src/main/resources/application.yaml" -D'jasypt.encryptor.password'="the password"-->
+                <plugin>
+                    <groupId>com.github.ulisesbocchio</groupId>
+                    <artifactId>jasypt-maven-plugin</artifactId>
+                    <version>${jasypt-maven-plugin.version}</version>
+                </plugin>
+                <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                     <version>${spring-boot-maven-plugin.version}</version>
-                    <configuration>
-                        <includeSystemScope>true</includeSystemScope>
-                        <excludes>
-                            <exclude>
-                                <groupId>org.projectlombok</groupId>
-                                <artifactId>lombok</artifactId>
-                            </exclude>
-                        </excludes>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

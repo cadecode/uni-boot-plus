@@ -15,6 +15,12 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-common</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        
         <!--spring webmvc-->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -29,11 +35,6 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-common</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-dependency</artifactId>
+        <artifactId>ubp-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath>../ubp-dependency/pom.xml</relativePath>
     </parent>
 
     <artifactId>ubp-admin</artifactId>
@@ -16,6 +15,22 @@
     </description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-framework</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-actuator</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-swagger</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+        
         <!--test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -26,19 +41,6 @@
         <dependency>
             <groupId>com.github.ulisesbocchio</groupId>
             <artifactId>jasypt-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-framework</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.cadecode</groupId>
-            <artifactId>ubp-starter-swagger</artifactId>
         </dependency>
     </dependencies>
 
