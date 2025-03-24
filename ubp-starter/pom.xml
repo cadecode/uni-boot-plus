@@ -23,6 +23,7 @@
         <module>ubp-starter-swagger</module>
         <module>ubp-starter-cache</module>
         <module>ubp-starter-security</module>
+        <module>ubp-starter-concurrent</module>
     </modules>
 
     <dependencies>

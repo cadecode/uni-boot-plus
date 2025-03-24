@@ -50,7 +50,12 @@
             <artifactId>ubp-starter-security</artifactId>
             <version>${ubp.version}</version>
         </dependency>
-        
+        <dependency>
+            <groupId>com.github.cadecode</groupId>
+            <artifactId>ubp-starter-concurrent</artifactId>
+            <version>${ubp.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-auto</artifactId>
