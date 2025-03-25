@@ -64,10 +64,8 @@ public enum WebErrorEnum implements ErrorCode {
     /**
      * 特殊处理接口返回 null 的情况
      */
-    RES_BODY_NULL("WEB_1009", "响应体为空"),
-
-    ;
-
+    RES_BODY_NULL("WEB_9999", "响应体为空");
+    
     private final String code;
 
     private final String message;

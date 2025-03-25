@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.util.Objects;
+
 /**
  * GeneralException 统一处理器
  *
@@ -24,11 +26,11 @@ public class GeneralExceptionAdvisor {
      */
     @ExceptionHandler(GeneralException.class)
     public ApiResult<Object> handleGeneralException(GeneralException e, HttpServletRequest request) {
-        log.error("Handle general exception, uri:{} =>", request.getRequestURI(), e);
         // 特殊处理接口返回 null 的情况
-        if (WebErrorEnum.RES_BODY_NULL.getCode().equals(e.getErrorCode().getCode())) {
+        if (Objects.equals(WebErrorEnum.RES_BODY_NULL.getCode(), e.getErrorCode().getCode())) {
             return ApiResult.ok(null);
         }
+        log.error("Handle general exception, uri:{} =>", request.getRequestURI(), e);
         return ApiResult.error(e.getErrorCode()).moreInfo(e.getMoreInfo());
     }
 
