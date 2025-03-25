@@ -1,7 +1,7 @@
 package com.github.cadecode.ubp.starter.concurrent.aspect;
 
+import com.github.cadecode.ubp.common.exception.RateLimitException;
 import com.github.cadecode.ubp.starter.concurrent.annotation.RateLimit;
-import com.github.cadecode.ubp.starter.concurrent.exception.RateLimitException;
 import com.google.common.util.concurrent.RateLimiter;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
