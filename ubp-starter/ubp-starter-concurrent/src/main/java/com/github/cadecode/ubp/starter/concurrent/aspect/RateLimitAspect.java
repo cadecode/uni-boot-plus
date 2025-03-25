@@ -27,8 +27,8 @@ public class RateLimitAspect {
 
     private static final ConcurrentHashMap<String, RateLimiter> LIMITER_MAP = new ConcurrentHashMap<>();
 
-    @Pointcut("@within(com.github.cadecode.uniboot.common.plugin.concurrent.annotation.RateLimit) " +
-            "|| @annotation(com.github.cadecode.uniboot.common.plugin.concurrent.annotation.RateLimit)")
+    @Pointcut("@within(com.github.cadecode.ubp.starter.concurrent.annotation.RateLimit) " +
+            "|| @annotation(com.github.cadecode.ubp.starter.concurrent.annotation.RateLimit)")
     public void pointCut() {
 
     }
