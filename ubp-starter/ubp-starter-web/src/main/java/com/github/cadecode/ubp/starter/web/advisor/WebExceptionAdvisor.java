@@ -5,6 +5,7 @@ import com.github.cadecode.ubp.common.exception.RateLimitException;
 import com.github.cadecode.ubp.starter.web.enums.WebErrorEnum;
 import com.github.cadecode.ubp.starter.web.model.ApiResult;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.Ordered;
@@ -44,15 +45,25 @@ public class WebExceptionAdvisor {
     }
 
     /**
-     * 处理参数校验异常
+     * 处理参数绑定异常
      */
     @ExceptionHandler(value = BindException.class)
-    public ApiResult<Object> handleValidationException(BindException e, HttpServletRequest request) {
+    public ApiResult<Object> handleBindException(BindException e, HttpServletRequest request) {
         log.error("Handle validation exception, uri:{} =>", request.getRequestURI(), e);
         // 获取错误信息，并拼接
         String msg = e.getBindingResult().getFieldErrors().stream()
                 .map(o -> "[" + o.getField() + "]" + o.getDefaultMessage())
                 .collect(Collectors.joining(","));
+        return ApiResult.error(WebErrorEnum.VALIDATED_ERROR).moreInfo(msg).path(request.getRequestURI());
+    }
+
+    /**
+     * 处理参数校验异常
+     */
+    @ExceptionHandler(value = ValidationException.class)
+    public ApiResult<Object> handleValidationException(ValidationException e, HttpServletRequest request) {
+        log.error("Handle validation exception, uri:{} =>", request.getRequestURI(), e);
+        String msg = e.getMessage();
         return ApiResult.error(WebErrorEnum.VALIDATED_ERROR).moreInfo(msg).path(request.getRequestURI());
     }
 
