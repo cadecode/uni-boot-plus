@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-parent</artifactId>
+        <artifactId>ubp-basic-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -18,42 +18,42 @@
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-common</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-web</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-log</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-datasource</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-mybatis</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-cache</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-security</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-concurrent</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
 
         <dependency>
@@ -95,6 +95,5 @@
             <artifactId>hutool-http</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

@@ -18,17 +18,17 @@
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-framework</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-actuator</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-swagger</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         
         <!--test-->

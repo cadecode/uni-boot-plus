@@ -9,46 +9,32 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>ubp-starter-datasource</artifactId>
+    <artifactId>ubp-starter-web</artifactId>
     <description>
-        数据源、连接池、ORM 框架集成
+        spring webmvc 集成，提供统一格式返回、全局异常处理等
     </description>
 
     <dependencies>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-common</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         
-        <!--aop-->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-        </dependency>
+        <!--spring webmvc-->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
+            <artifactId>spring-webmvc</artifactId>
         </dependency>
+        <!--validator-->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
         </dependency>
         <!--servlet-->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
         </dependency>
-        <!--druid 连接池-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-3-starter</artifactId>
-        </dependency>
-        <!--hikari-->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency>
     </dependencies>
-
 </project>

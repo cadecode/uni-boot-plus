@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.github.cadecode</groupId>
-        <artifactId>ubp-parent</artifactId>
+        <artifactId>ubp-basic-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
@@ -14,6 +14,7 @@
     <description>
         中间件集成
     </description>
+
     <modules>
         <module>ubp-starter-web</module>
         <module>ubp-starter-log</module>

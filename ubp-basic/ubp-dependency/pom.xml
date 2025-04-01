@@ -8,10 +8,14 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
-    <name>ubp-dependency</name>
+    <name>uni-boot-plus-dependency</name>
     <description>
         依赖集中管理
     </description>
+
+    <modules>
+        <module>../</module>
+    </modules>
 
     <properties>
         <spring-boot.version>3.2.5</spring-boot.version>

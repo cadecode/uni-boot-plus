@@ -24,14 +24,14 @@
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-common</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cadecode</groupId>
             <artifactId>ubp-starter-mybatis</artifactId>
-            <version>${ubp.version}</version>
+            <version>${ubp-basic.version}</version>
         </dependency>
-        
+
         <!--mybatis-flex codegen-->
         <dependency>
             <groupId>com.mybatis-flex</groupId>

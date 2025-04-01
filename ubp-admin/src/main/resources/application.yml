@@ -101,7 +101,7 @@ sa-token:
 # 本项目配置
 uni-boot:
   base-config:
-    version: '@ubp.version@'
+    version: '@ubp-basic.version@'
   swagger:
     title: UniBootPlus API Doc
     description: UniBootPlus 接口文档
