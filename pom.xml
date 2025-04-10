@@ -11,6 +11,7 @@
 
     <packaging>pom</packaging>
     <artifactId>ubp-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <name>uni-boot-plus</name>
     <description>
         UniBootPlus，一个轻量、高效、优雅的 SpringBoot 应用骨架
@@ -20,6 +21,11 @@
         <module>ubp-codegen</module>
         <module>ubp-admin</module>
     </modules>
+
+    <properties>
+        <!--覆盖 ubp-basic 版本-->
+        <ubp-basic.version>${project.parent.version}</ubp-basic.version>
+    </properties>
 
     <profiles>
         <profile>
